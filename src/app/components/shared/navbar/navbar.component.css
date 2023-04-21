@@ -1,0 +1,63 @@
+.navbar-custom {
+    background-color: #361b5e !important;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 10px !important;
+    color: white !important;
+    margin-bottom: 10px !important;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.1);  */
+}
+.navbar-brand-custom {
+    display: inline-block !important;
+    color: white !important;
+    margin-left: 35px;
+    font-size: 20px;
+}
+.search-input {
+    border-radius: 20px;
+    border: 1px solid;
+    margin-left: 15px;
+  }
+.logo-container {
+    display: inline-block !important;
+}
+#minimizeSidebar{
+    border: 1px solid white !important;
+    margin-top: 17px;
+}
+.dropdown-icons-custom {
+}
+.navbar-header {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.avatar-div{
+    display: inline-block;
+}
+.profile{
+    display: flex;
+    align-items: center;
+    color: white;
+}
+.profile-details{
+    display: inline-block;
+}
+.avatar{
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 5px;
+    border: 2px solid #493569;
+    padding: 2.5px;
+}
+.icon-custom{
+    display: inline-block;
+}
+.navbar .navbar-nav>li>a{
+    margin: auto !important;
+}
+.dropdown-toggle{
+    margin: none !important;
+}

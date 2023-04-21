@@ -1,0 +1,177 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <!-- Modal -->
+    <div class="modal fade" id="invalidBookingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Invalid Booking Time</h4>
+          </div>
+          <div class="modal-body">
+            You are trying to double book a slot for a staff member. Please choose another time when the staff member is
+            free for an appointment
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-fill" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="calender" class="" >
+      <div class="content">
+        <div class="card-dashboard" style="background-color: transparent;">
+          <div class="row">
+            <div id="bookingTable" class="col-md-12" style="max-height: fit-content; flex-direction: row;">
+
+              <ejs-schedule 
+                  id="Schedule" 
+                  #scheduleObj 
+                  cssClass='schedule-drag-drop schedule-group-custom-work-days schedule-cell-dimension' 
+                  width=auto 
+                  height='650px'
+                  style="min-width: min-content; border-radius: 10px; margin: 10px;" 
+                  [currentView]="currentView" 
+                  [group]="group" 
+                  (actionBegin)="onActionBegin($event)" 
+                  (renderCell)="onRenderCell($event)"
+                  (drag)="onItemDrag($event)" 
+                  (popupOpen)="onPopupOpen($event)" 
+                  [eventSettings]="eventSettings" 
+                  [workHours]="workHours" 
+                  [workDays]='workWeekDays'
+                  (dataBound)="onBound($event)" 
+                  [allowResizing]="allowResizing" 
+                  [allowDragAndDrop]="allowDragDrop" 
+                  (cellClick)="onCellClick($event)"
+                  [showHeaderBar]="showHeaderBar"
+                >
+                <ng-template #quickInfoTemplatesHeader let-data>
+                  <ng-container 
+                      [ngTemplateOutlet]="data.elementType == 'cell' ? cellHeader : eventHeader" 
+                      [ngTemplateOutletContext]="{data:data}"
+                    >
+                    <div class="e-event-content" style="padding:10px; word-wrap: break-all">
+                      <div 
+                          class="e-event-content" 
+                          style="padding:10px; font-weight: bold; word-wrap: break-word; font-size: 23px; color: white;"
+                        > Appointment Details
+                        <div style="font-size: 12px;">{{data.startTime.toLocaleString()}} - {{data.endTime.toLocaleString()}}</div>
+                          <!-- {{data.service}} -->
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-template>
+
+                <ng-template #dateRangeTemplate let-data>
+                  <div class="date-text">asdfs</div>
+                </ng-template>
+
+                <ng-template #eventSettingsTemplate let-data>
+                  <div class='template-wrap' >
+                    <div class="e-subject" style="width:100%">
+                      
+                      <div style="width:100%; float: left;"> Service Name : {{data.service}}  #{{data.id}}</div>
+                      
+                    </div>
+                    <div style="width: 100%"> Time : {{ data.startTime | date: "HH:mm"}} - {{ data.endTime |date: "HH:mm"}} </div>
+                    <div class="e-location" style="width:100%" > Name : {{data.firstName}}
+                      {{data.lastName}}</div>
+                  </div>
+                </ng-template>
+                
+                <ng-template #quickInfoTemplatesContent let-data>
+                  <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellContent : eventContent"
+                    [ngTemplateOutletContext]="{data:data}"></ng-container>
+                </ng-template>
+
+                <ng-template #eventContent let-data="data">
+                  <div class="e-event-content" style="padding:10px; word-wrap: break-all;">
+                    <div class="service-name" style="padding-bottom:10px; font-weight: bold;">Serice Name: {{data.service}}</div>
+                    <div class="service-name" style="padding-bottom:10px; font-weight: bold;">Employee Name: {{getEmployeeName(data.employeeId)}}</div>
+                    <div class="location" style="padding-bottom:10px; font-weight: bold;">Customer Name: {{data.firstName}} {{data.lastName}}</div>
+                    <div class="start-time" style="padding-bottom:10px; font-weight: bold;">Time: {{data.startTime.toLocaleString()}}</div>
+                    <div class="location" style="padding-bottom:10px; font-weight: bold;">Notes: {{data.description}}</div>
+                    <div class="left-button" style="display: inline-block;">
+                      <button class="e-edit" title="Edit" (click)="onEditClick($event)">Edit</button>
+                    </div>
+                    <div class="right-button" style="display: inline-block; margin-left: 5px;">
+                      <button class="e-delete" title="Delete" (click)="onDeleteClick($event)">Delete</button>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #quickInfoTemplatesFooter let-data>
+                  <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellFooter : eventFooter"
+                    [ngTemplateOutletContext]="{data:data}"></ng-container>
+                </ng-template>
+                <ng-template #eventFooter let-data>
+                  <div class="e-event-footer">
+                    <div class="left-button">
+                      <button class="e-delete" title="Delete" style="color:#493569">Delete</button>
+                    </div>
+                    <div class="right-button">
+                      <button class="e-edit" title="Edit" >Edit</button>
+                    </div>
+                  </div>
+                </ng-template>
+
+                <div class="e-cell-content">
+                  <form class="e-schedule-form">
+                    <div style="padding:10px">
+                      <input class="subject e-field" type="text" name="Subject" placeholder="Title" style="width:100%">
+                    </div>
+                    <div style="padding:10px">
+                      <input class="location e-field" type="text" name="Location" placeholder="Location"
+                        style="width:100%">
+                    </div>
+                  </form>
+                </div>
+                <ejs-calendar [value]='dateValue' [min]='minDate' [max]='maxDate'></ejs-calendar>
+                <e-views>
+                  <e-view option="Day"></e-view>
+                  <!-- <e-view option="WorkWeek"></e-view> -->
+                  <e-view option="Week"></e-view>
+                  <!-- <e-view option="Month"></e-view> -->
+                </e-views>
+
+                <e-resources>
+                  <e-resource field="employeeId" 
+                              title="Employee" 
+                              name="Employees" 
+                              [dataSource]="resourceDataSource"
+                              textField="name" 
+                              idField="id" 
+                              colorField="color"
+                              workDaysField='workDays' 
+                              startHourField='startHour' 
+                              endHourField='endHour'
+                              >
+                  </e-resource>
+                </e-resources>
+                <ng-template #resourceHeaderTemplate let-data>
+                  <div class='template-wrap-content'>
+                    <div class="avatar-div"><img id="staffProfilePicture" class="avatar border-gray, avatar" [src]="getWorkerImage(data)"
+                      onerror="this.src='../../assets/img/staff-profiles/0.jpg'" alt="..." /></div>
+                    <div class="resource-details">
+                        <div class="resource-name">{{getWorkerName(data)}}</div>
+                    </div>
+                  </div>
+                  <!-- <div class='content'>
+                    <div><img id="staffProfilePicture" class="avatar border-gray, avatar" [src]="getWorkerImage(data)"
+                        onerror="this.src='../../assets/img/staff-profiles/0.jpg'" alt="..." /></div>
+                    <div class="resource-details">
+                      <div class="resource-name">{{getWorkerName(data)}}</div>
+                      <div class="resource-designation">{{getWorkerLevel(data)}}</div>
+                    </div>
+                  </div> -->
+                </ng-template>
+              </ejs-schedule>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end card -->
+
+  </div>
+</div>

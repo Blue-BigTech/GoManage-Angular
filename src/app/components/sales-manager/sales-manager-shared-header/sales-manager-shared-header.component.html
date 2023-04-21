@@ -1,0 +1,13 @@
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main-heading">
+        <!-- <div class="heading" [routerLink]="['/staff']">Staff List</div>
+        <div class="heading">Staff Access</div>
+        <div class="heading">Staff Commission</div>
+        <div class="heading" [routerLink]="['/staff/rota']">Rota</div>
+        <div class="heading">Staff performence</div> -->
+        
+
+        <div class="heading" *ngFor="let routing of ROUTE_URLS" [class.active]="routing.url == CURRENT_ROUTE_LINK" [routerLink]="routing.is_working ? [routing.url] : [CURRENT_ROUTE_LINK]"> {{ routing.value }} </div>
+    </div>
+</div>    

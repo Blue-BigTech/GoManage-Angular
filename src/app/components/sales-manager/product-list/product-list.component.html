@@ -1,0 +1,557 @@
+<div class="main-content">
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+      <p style="color: white" > {{ SPINNER_TEXT }} </p>
+  </ngx-spinner>
+
+<div class="main-content" *ngIf="MAIN_CONTENT">
+
+    <nav #navbar class="navbar navbar-default  custom">
+        <div class="container-fluid">
+
+            <app-sales-manager-shared-header></app-sales-manager-shared-header>
+
+            <div class="row main-part">  
+                <div class="col-md-12">
+                    <div class="card">             
+                        <div class="card-body">
+                            <!-- Category text and new category button  -->
+                            <div class="row category-header-div">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+                                    <p class="category-heading"><i class="fa fa-list" style="color:aqua; margin-right:5px;"></i>Category</p>
+                                </div>
+                            </div>
+
+                            <hr class="solid" style="margin-top: 0px;">
+                            <!-- Category buttons shows -->
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 categories-button">
+                                    <div *ngFor="let brand_value of BRAND_LIST" class="category-div">
+                                        <button 
+                                            class="btn btn-info category-name-button" 
+                                            [style.background-color]="brand_value.color_name"
+                                            [style.border-color]="brand_value.color_name"
+                                            (click)="_selectBrand (brand_value.id)"
+                                            > 
+                                                {{ brand_value.name }} 
+                                                <i class="fa fa-check" *ngIf="brand_value.select"></i>
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-info new-category" style="margin-left:auto; margin-right: 15px;" (click)="_openBrandPopup()"> + Add New Category </button>
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row service-list-text-btn">
+                        <div class="col-md-6">
+                            <p class="service-list-text"> Product List <i class="fa fa-sort-desc" style="margin-left:5px;"></i></p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <button class="btn btn-info add-new-service" (click)="_openProductPopup()"> + Add New Product </button>
+                        </div>
+                    </div>
+                    <div class="row service-main-div">
+                        <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                            <div class="card" style="margin-bottom: 15px;">                      
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div style="padding-left: 30px;">Product<i class="fa fa-sort-desc" style="padding-left: 5px;"></i></div>
+                                                </th>
+                                                <th>
+                                                    <div>Price<i class="fa fa-sort-desc" style="padding-left: 5px;"></i></div>
+                                                </th>
+                                                <th>
+                                                    <div>Quantity<i class="fa fa-sort-desc" style="padding-left: 5px;"></i></div>
+                                                </th>
+                                                <th class="product-is-available">
+                                                    <div>Status<i class="fa fa-sort-desc" style="padding-left: 5px;"></i></div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let product of PRODUCT_LIST" class="product-tbody" (click)="_getSelectedProduct(product.id)">
+                                                <td>
+                                                    <div class="product_td_div" style="padding-left: 30px;">
+                                                        <div>
+                                                            <img [src]="product.image">
+                                                        </div>
+                                                        <div class="name_description">
+                                                            <div class="product_name"> {{ product.name }} </div>
+                                                            <div class="product_description"> {{ product.description != 'null' &&  product.description != '' ? product.description : '' }} </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </td>
+                                                <td class="text-color">
+                                                    {{ product.price | currency:'EUR'}}
+                                                </td>
+        
+                                                <td class="text-color">
+                                                    {{ product.quantity }}
+                                                </td>
+                                                <td>
+                                                    
+                                                    <label class="switch">
+                                                        <input type="checkbox" [checked]="product.isAvailable">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                            <div class="card">
+                                <div class="card-body" style="padding-top:20px;">
+                                    <form [formGroup]="UPDATE_PRODUCT_FORM" (ngSubmit)="_updateProduct(UPDATE_PRODUCT_FORM)">
+                                        <div class="row my-row">
+                                          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                              <label>Product Name</label>
+                                              <input type="text" class="form-control" formControlName="productName" autocomplete="off" placeholder="enter the product name">
+                                               
+                                              <div *ngFor="let error of errorMesages.productName">
+                                                  <div *ngIf="productName.hasError(error.type) && (productName.dirty || productName.touched)">
+                                                    <div class="alert alert-danger">
+                                                      {{ error.message}}.
+                        
+                                                    </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                        
+                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                              <label>Brand</label>
+                                              <select class="form-control" formControlName="brand"  placeholder="enter the brand">
+                                                <option *ngFor="let BRAND of BRAND_LIST" [value]="BRAND.id"> {{ BRAND.name}} </option>
+                                              </select>
+                                              
+                                              <div *ngFor="let error of errorMesages.brand">
+                                                  <div *ngIf="brand.hasError(error.type) && (brand.dirty || brand.touched)">
+                                                    <div class="alert alert-danger">
+                                                      {{ error.message}}.
+                                                    </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                        
+                                        </div>
+                                        
+                        
+                                        <div class="row my-row">
+                                          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                              <label>Product Description</label>
+                                              <input type="text" class="form-control" formControlName="productDescription" autocomplete="off" placeholder="enter the product description">
+                                              
+                                              <div *ngFor="let error of errorMesages.productDescription">
+                                                  <div *ngIf="productDescription.hasError(error.type) && (productDescription.dirty || productDescription.touched)">
+                                                    <div class="alert alert-danger">
+                                                      {{ error.message}}.
+                        
+                                                    </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                        
+                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                            <label>Quantity</label>
+                                            <input type="text" class="form-control" formControlName="quantity" (keypress)="numberOnlyValidation($event)"  placeholder="enter the quantity">
+                                            
+                                            <div *ngFor="let error of errorMesages.quantity">
+                                                <div *ngIf="quantity.hasError(error.type) && (quantity.dirty || quantity.touched)">
+                                                  <div class="alert alert-danger">
+                                                    {{ error.message}}.
+                                                  </div>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                            
+                                        </div>
+                        
+                                        <div class="row my-row">
+                                          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5" style="margin-bottom: -20px;">
+                                              <label>Reorder notification Quantity</label>
+                                              <input type="text" class="form-control" formControlName="reorderQuantity" autocomplete="off" placeholder="enter the reorder quantity">
+                                              
+                                              <div *ngFor="let error of errorMesages.reorderQuantity">
+                                                  <div *ngIf="reorderQuantity.hasError(error.type) && (reorderQuantity.dirty || reorderQuantity.touched)">
+                                                    <div class="alert alert-danger">
+                                                      {{ error.message}}.
+                        
+                                                    </div>
+                                                  </div>
+                                                  <br>
+                                              </div>
+                                          </div>
+                                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                            <label>Make this product available online</label>
+                                            <select class="form-control" formControlName="isAvailable"  >
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                    
+                                            <div *ngFor="let error of errorMesages.isAvailable">
+                                                <div *ngIf="isAvailable.hasError(error.type) && (isAvailable.dirty || isAvailable.touched)">
+                                                <div class="alert alert-danger">
+                                                    {{ error.message}}.
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                            
+                        
+                                        </div>
+                                        <div class="row my-row">
+                                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                <label>Price(€)</label>
+                                                <input type="text" class="form-control" (keypress)="numberOnlyValidation($event)" formControlName="price" autocomplete="off" placeholder="enter the price">
+                                                
+                                                <div *ngFor="let error of errorMesages.price">
+                                                    <div *ngIf="price.hasError(error.type) && (price.dirty || price.touched)">
+                                                    <div class="alert alert-danger">
+                                                        {{ error.message}}.
+                        
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                <label>Unit Volume</label>
+                                                <div class="row">
+                                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                                        <input class="form-control" formControlName="unitVolume"  >
+                                                        <div *ngFor="let error of errorMesages.unitVolume">
+                                                            <div *ngIf="unitVolume.hasError(error.type) && (unitVolume.dirty || unitVolume.touched)">
+                                                            <div class="alert alert-danger">
+                                                                {{ error.message}}.
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="margin-top:-5px;">
+                                                        <select class="form-control" formControlName="unitMeasurement" style="margin-top: 5px;">
+                                                            <option value="ml">ml</option>
+                                                            <option value="g">g</option>
+                                                          </select>
+                                  
+                                                          <div *ngFor="let error of errorMesages.unitMeasurement">
+                                                              <div *ngIf="unitMeasurement.hasError(error.type) && (unitMeasurement.dirty || unitMeasurement.touched)">
+                                                              <div class="alert alert-danger">
+                                                                  {{ error.message}}.
+                                                              </div>
+                                                              </div>
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                            
+                                        </div>
+                                        <div class="row my-row">
+                                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                                <label>Update Product Image</label>
+                                                <input type="file" class="form-control" (change)="_selectFile($event)"  formControlName="productImage" autocomplete="off" >
+                                                
+                                                <div *ngFor="let error of errorMesages.productImage">
+                                                    <div *ngIf="productImage.hasError(error.type) && (productImage.dirty || productImage.touched)">
+                                                    <div class="alert alert-danger">
+                                                        {{ error.message}}.
+                        
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                                            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                                <input type="submit" [disabled]="!UPDATE_PRODUCT_FORM.valid"  class="btn btn-info submit-button"  value="Update">
+                                                <input type="button" class="btn btn-danger delete_product_btn" [disabled]="PRODUCT_ID == '' || PRODUCT_ID == null" (click)="_deleteProduct(PRODUCT_ID)" value="Delete">
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="modal" tabindex="-1"  role="dialog" [ngStyle]="{'display': MODEL_OPEN ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable model-transaction" role="document">
+        <div class="modal-content">
+           
+            <div class="modal-body ">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <h6 class="new-cat-heading">New Brand</h6>
+                    </div>
+                </div>
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <label> Brand Name </label>
+                        <input class="form-control" placeholder="Brand Name..." [(ngModel)]="NEW_BRAND_NAME">
+                    </div>
+                </div>
+
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <label> Brand Status </label>
+
+                        <select class="form-control" [(ngModel)]="NEW_BRAND_STATUS">
+                            <option value="0">Inactive</option>
+                            <option value="1">Active</option>
+                        </select>
+                    </div>
+                </div>
+                
+
+                <div class="row new-category-pop-button-div">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    
+                        <button class="btn btn-success new-cat-save-btn" (click)="_createBrand()">Save</button>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    
+                        <button class="btn btn-danger new-cat-cancel-btn" (click)="_closeBrandPopup()">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+  </div>
+     
+</div>
+<div class="modal message-model" tabindex="-1"  role="dialog" [ngStyle]="{'display': MODEL_UPDATE_OPEN ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+  
+            <div class="right-icon">
+              <i class="fa fa-check rights" aria-hidden="true"></i>
+            </div>
+            <div class="modal-header mod-header"></div>
+            <div class="modal-body mod-conetnt">
+              
+              <span> Product updated successfully! </span>
+              <div class="confirm-div">
+                <button class="btn btn-success confirm" (click)="_closeModel()">Confirm</button>
+              </div>
+              
+            </div>
+            <div class="modal-footer mod-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal message-model" tabindex="-1"  role="dialog" [ngStyle]="{'display': MODEL_ADD_PRODUCT_OPEN ? 'block' : 'none' }">
+    <div class="modal-product modal-dialog-scrollable model-transaction" role="document">
+        <div class="modal-content" style="padding-top: 20px; padding-bottom: 20px;">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                
+                    <h6 class="new-cat-heading">New Product</h6>
+                </div>
+            </div>
+            <form [formGroup]="ADD_PRODUCT_FORM" (ngSubmit)="_addProduct(ADD_PRODUCT_FORM)">
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Product Name</label>
+                      <input type="text" class="form-control" formControlName="_productName" autocomplete="off" placeholder="enter the product name">
+                       
+                      <div *ngFor="let error of errorMesages.productName">
+                          <div *ngIf="_productName.hasError(error.type) && (_productName.dirty || _productName.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Brand</label>
+                      <select class="form-control" formControlName="_brand"  placeholder="enter the brand">
+                        <option *ngFor="let BRAND of BRAND_LIST" [value]="BRAND.id"> {{ BRAND.name}} </option>
+                      </select>
+                      
+                      <div *ngFor="let error of errorMesages.brand">
+                          <div *ngIf="_brand.hasError(error.type) && (_brand.dirty || _brand.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+
+                </div>
+                
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Product Description</label>
+                      <input type="text" class="form-control" formControlName="_productDescription" autocomplete="off" placeholder="enter the product description">
+                      
+                      <div *ngFor="let error of errorMesages.productDescription">
+                          <div *ngIf="_productDescription.hasError(error.type) && (_productDescription.dirty || _productDescription.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <label>Quantity</label>
+                    <input type="text" class="form-control" formControlName="_quantity" (keypress)="numberOnlyValidation($event)"  placeholder="enter the quantity">
+                    
+                    <div *ngFor="let error of errorMesages.quantity">
+                        <div *ngIf="_quantity.hasError(error.type) && (_quantity.dirty || _quantity.touched)">
+                          <div class="alert alert-danger">
+                            {{ error.message}}.
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    
+                </div>
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5" style="margin-bottom: -20px;">
+                      <label>Reorder notification Quantity</label>
+                      <input type="text" class="form-control" formControlName="_reorderQuantity" autocomplete="off" placeholder="enter the reorder quantity">
+                      
+                      <div *ngFor="let error of errorMesages.reorderQuantity">
+                          <div *ngIf="_reorderQuantity.hasError(error.type) && (_reorderQuantity.dirty || _reorderQuantity.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+
+                            </div>
+                          </div>
+                          <br>
+                      </div>
+                  </div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <label>Make this product available online</label>
+                    <select class="form-control" formControlName="_isAvailable"  >
+                        <option value="1">Yes</option>
+                        <option value="2">No</option>
+                    </select>
+
+                    <div *ngFor="let error of errorMesages.isAvailable">
+                        <div *ngIf="_isAvailable.hasError(error.type) && (_isAvailable.dirty || _isAvailable.touched)">
+                        <div class="alert alert-danger">
+                            {{ error.message}}.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    
+
+                </div>
+                <div class="row my-row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Price(€)</label>
+                        <input type="text" class="form-control" (keypress)="numberOnlyValidation($event)" formControlName="_price" autocomplete="off" placeholder="enter the price">
+                        
+                        <div *ngFor="let error of errorMesages.price">
+                            <div *ngIf="_price.hasError(error.type) && (_price.dirty || _price.touched)">
+                            <div class="alert alert-danger">
+                                {{ error.message}}.
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Unit Volume</label>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <input class="form-control" formControlName="_unitVolume"  >
+                                <div *ngFor="let error of errorMesages.unitVolume">
+                                    <div *ngIf="_unitVolume.hasError(error.type) && (_unitVolume.dirty || _unitVolume.touched)">
+                                    <div class="alert alert-danger">
+                                        {{ error.message}}.
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="margin-top:-5px;">
+                                <select class="form-control" formControlName="_unitMeasurement" style="margin-top: 5px;">
+                                    <option value="ml">ml</option>
+                                    <option value="g">g</option>
+                                  </select>
+          
+                                  <div *ngFor="let error of errorMesages.unitMeasurement">
+                                      <div *ngIf="_unitMeasurement.hasError(error.type) && (_unitMeasurement.dirty || _unitMeasurement.touched)">
+                                      <div class="alert alert-danger">
+                                          {{ error.message}}.
+                                      </div>
+                                      </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    
+                </div>
+                <div class="row my-row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Add Product Image</label>
+                        <input type="file" class="form-control" (change)="_product_selectFile($event)"  formControlName="_productImage" autocomplete="off" >
+                        
+                        <div *ngFor="let error of errorMesages.productImage">
+                            <div *ngIf="_productImage.hasError(error.type) && (_productImage.dirty || _productImage.touched)">
+                            <div class="alert alert-danger">
+                                {{ error.message}}.
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                    <input type="submit" [disabled]="!ADD_PRODUCT_FORM.valid"  class="btn btn-success new-pro-save-btn submit-button"  value="Add">
+                    <input type="button" class="btn btn-danger new-cat-cancel-btn" style="margin-left: 5px;" (click)="_cancelModelProduct()" value="Cancel">
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

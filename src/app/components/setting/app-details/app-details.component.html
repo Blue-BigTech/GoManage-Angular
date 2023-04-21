@@ -1,0 +1,243 @@
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > {{ SPINNER_TEXT }} </p>
+</ngx-spinner>
+<div class="main-content">
+
+    <nav #navbar class="navbar navbar-default  custom">
+        <div class="container-fluid">
+
+            <app-setting-header></app-setting-header>
+
+            <div class="row main-part">  
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="business-heading">
+                                <p class="business-heading-title">App Details</p>
+                                <p class="business-heading-subtitle">Update informantion for your app in this page</p>
+                            </div>
+                            <div class="row service-main-div">
+                                <div class="left-setting-parent col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                                    <form [formGroup]="UPDATE_SETTING_FORM" (ngSubmit)="_updateSetting()" novalidate>
+                                        <div class="service-side-input-form">
+                                            <div class="row stripe_secret_key_header">Stripe Secret Key</div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <div class="service-input">
+                                                        <div class="open-close-list">
+                                                            <label>Stripe</label>
+                                                            <div class="open-close-switch">
+                                                                <label class="switch">
+                                                                    <input type="checkbox" (change)="checkValueStripe()">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                                <label class="open">{{txt_open_close_stripe}}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <div class="service-input">
+                                                        <div class="open-close-list">
+                                                            <label>SMS Setting</label>
+                                                            <div class="open-close-switch">
+                                                                <label class="switch">
+                                                                    <input type="checkbox" (change)="checkValueSmsSetting()">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                                <label class="open">{{txt_open_close}}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <div class="service-input">
+                                                        <label class="center-block">Stripe Publishable Key
+                                                            <input class="form-control" formControlName="stripePublishableKey">
+                                                        </label>
+                                                        <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['stripePublishableKey'].invalid && (UPDATE_SETTING_FORM.controls['stripePublishableKey'].dirty || UPDATE_SETTING_FORM.controls['stripePublishableKey'].touched)">
+                                                            <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['stripePublishableKey'].errors.required">
+                                                                Stripe Publishable Key is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <div class="service-input">
+                                                        <label class="center-block">SMS Client Name
+                                                            <input class="form-control" formControlName="smsClientName">
+                                                        </label>
+                                                        <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['smsClientName'].invalid && (UPDATE_SETTING_FORM.controls['smsClientName'].dirty || UPDATE_SETTING_FORM.controls['smsClientName'].touched)">
+                                                            <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['smsClientName'].errors.required">
+                                                                SMS Client Name is required.
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <div class="service-input">
+                                                        <label class="center-block">Stripe Secret Key
+                                                            <input class="form-control" formControlName="stripeSecretKey">
+                                                        </label>
+                                                        <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['stripeSecretKey'].invalid && (UPDATE_SETTING_FORM.controls['stripeSecretKey'].dirty || UPDATE_SETTING_FORM.controls['stripeSecretKey'].touched)">
+                                                            <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['stripeSecretKey'].errors.required">
+                                                                Stripe Secret Key is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <div class="service-input">
+                                                        <label class="center-block">SMS Token
+                                                            <input class="form-control" formControlName="smsToken">
+                                                        </label>
+                                                        <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['smsToken'].invalid && (UPDATE_SETTING_FORM.controls['smsToken'].dirty || UPDATE_SETTING_FORM.controls['smsToken'].touched)">
+                                                            <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['smsToken'].errors.required">
+                                                                SMS Token is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <div class="service-input">
+                                                        <label class="center-block">Mobile App Code Version
+                                                            <input class="form-control" formControlName="mobileAppCodeVersion">
+                                                        </label>
+                                                        <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['mobileAppCodeVersion'].invalid && (UPDATE_SETTING_FORM.controls['mobileAppCodeVersion'].dirty || UPDATE_SETTING_FORM.controls['mobileAppCodeVersion'].touched)">
+                                                            <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['mobileAppCodeVersion'].errors.required">
+                                                                Mobile App Code Version is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <div class="service-input">
+                                                        <label class="center-block">Business Owner Code Version
+                                                            <input class="form-control" formControlName="businessOwnerCodeVersion" (keypress)="numberOnlyValidation($event)">
+                                                        </label>
+                                                        <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['businessOwnerCodeVersion'].invalid && (UPDATE_SETTING_FORM.controls['businessOwnerCodeVersion'].dirty || UPDATE_SETTING_FORM.controls['businessOwnerCodeVersion'].touched)">
+                                                            <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['businessOwnerCodeVersion'].errors.required">
+                                                                Business Owner Code Version is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="submit" value="Update" class="btn update_btn">
+                                            <input type="button" class="btn cancel_btn" value="Cancel">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 open-close-div">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="upload_photo_div">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="upload_photo-heading-title">Upload Photo</div>
+                                                        <div class="upload_photo-heading-subtitle">Min size 24Kb,</div>
+                                                        <div class="upload_photo-heading-subtitle">max size 15Mb</div>
+                                                        <input type="file" class="image-input" #fileUpload>
+                                                        <div class="file-upload">
+                                                            <button mat-mini-fab class="upload_photo_btn" (click)="fileUpload.click()">
+                                                                upload
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div style="margin-top: 20px;">
+                                                <i class="material-icons" style="font-size: 20px;">color_lens</i>
+                                                <span class="heading" style="margin-left: 10px;">Primary Color</span>
+                                                <div class="categories-button">
+                                                    <div *ngFor="let color_value of PRIMARY_COLOR" class="category-div">
+                                                        <div 
+                                                            class="category-name-button" 
+                                                            [style.background-color]="color_value.color_name"
+                                                            [style.border-color]="color_value.color_name"
+                                                            (click)="_select_primary_color(color_value.id)"
+                                                            > 
+                                                            <i class="fa fa-check" style="color:white;margin-left: 1.5px;" *ngIf="color_value.select"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="margin-top: 20px;">
+                                                <i class="material-icons" style="font-size: 20px;">color_lens</i>
+                                                <span class="heading" style="margin-left: 10px;">Secondary Color</span>
+                                                <div class="categories-button">
+                                                    <div *ngFor="let color_value of SECONDARY_COLOR" class="category-div">
+                                                        <div 
+                                                            class="category-name-button" 
+                                                            [style.background-color]="color_value.color_name"
+                                                            [style.border-color]="color_value.color_name"
+                                                            (click)="_select_secondary_color(color_value.id)"
+                                                            > 
+                                                            <i class="fa fa-check" style="color:white;margin-left: 1.5px;" *ngIf="color_value.select"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="margin-top: 20px;">
+                                                <i class="material-icons" style="font-size: 20px;">color_lens</i>
+                                                <span class="heading" style="margin-left: 10px;">Text Color</span>
+                                                <div class="categories-button">
+                                                    <div *ngFor="let color_value of TEXT_COLOR" class="category-div">
+                                                        <div 
+                                                            class="category-name-button" 
+                                                            [style.background-color]="color_value.color_name"
+                                                            [style.border-color]="color_value.color_name"
+                                                            (click)="_select_text_color(color_value.id)"
+                                                            > 
+                                                            <i class="fa fa-check" style="color:white;margin-left: 1.5px;" *ngIf="color_value.select"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </nav>
+</div>
+            
+<!-- Success Pop-up start -->
+<div class="modal message-model" tabindex="-1"  role="dialog" [ngStyle]="{'display': SUCCESS_POP_UP ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable success-pop-up" role="document">
+        <div class="modal-content">
+  
+            <div class="right-icon">
+              <i class="fa fa-check rights" aria-hidden="true"></i>
+            </div>
+            <div class="modal-header mod-header"></div>
+            <div class="modal-body mod-conetnt">
+              
+              <span> {{ SUCCESS_POP_UP_MESSAGE }} </span>
+              <div class="confirm-div">
+                <button class="btn btn-success confirm" (click)="_closeSuccessModel()">Confirm</button>
+              </div>
+              
+            </div>
+            <div class="modal-footer mod-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Pop-up end -->

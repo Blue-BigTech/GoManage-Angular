@@ -1,0 +1,321 @@
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+  <p style="color: white" > {{ SPINNER_TEXT }} </p>
+</ngx-spinner>
+
+<div class="main-content" >
+
+    <nav #navbar class="navbar navbar-default  custom">
+        <div class="container-fluid">
+
+            <form [formGroup]="UPDATE_STAFF_FORM" (ngSubmit)="_updateStaff(UPDATE_STAFF_FORM)">
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>First Name</label>
+                      <input type="text" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="firstName" autocomplete="off" placeholder="enter the first name">
+                      
+                      <div *ngFor="let error of errorMesages.firstName">
+                          <div *ngIf="firstName.hasError(error.type) && (firstName.dirty || firstName.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Last Name</label>
+                      <input type="text" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="lastName"  placeholder="enter the last name">
+                      
+                      <div *ngFor="let error of errorMesages.lastName">
+                          <div *ngIf="lastName.hasError(error.type) && (lastName.dirty || lastName.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+                
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Phone</label>
+                        <input type="text" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" (keypress)="numberOnlyValidation($event)" formControlName="number"  placeholder="enter the phone number">
+                        
+                        <div *ngFor="let error of errorMesages.number">
+                            <div *ngIf="number.hasError(error.type) && (number.dirty || number.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Date of Birth</label>
+                        <input type="date" class="form-control" (change)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="dateOfBirth"  placeholder="enter the date of birth">
+                        
+                        <div *ngFor="let error of errorMesages.dateOfBirth">
+                            <div *ngIf="dateOfBirth.hasError(error.type) && (dateOfBirth.dirty || dateOfBirth.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Gender</label>
+                      
+                      <select class="form-control" formControlName="gender" >
+                        <option *ngFor="let gender of this.commonService.GENDER_LIST" (change)="_updateFormValue()" (blur)="_updateFormValue()" [value]="gender.value"> {{ gender.value }}</option>
+                      </select>
+                      <div *ngFor="let error of errorMesages.gender">
+                          <div *ngIf="gender.hasError(error.type) && (gender.dirty || gender.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Address</label>
+                      <input type="text" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" (blur)="_updateFormValue()"  formControlName="address"  placeholder="enter the address">
+                      
+                      <div *ngFor="let error of errorMesages.address">
+                          <div *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+               
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Emergency Contact Name</label>
+                      <input type="text" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="emergencyContactName"  placeholder="enter the emergency contact name">
+                      
+                      <div *ngFor="let error of errorMesages.emergencyContactName">
+                          <div *ngIf="emergencyContactName.hasError(error.type) && (emergencyContactName.dirty || emergencyContactName.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Emergency Contact Number</label>
+                      <input type="text" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" (keypress)="numberOnlyValidation($event)" formControlName="emergencyContactNumber"  placeholder="enter the emergency contact number">
+                      
+                      <div *ngFor="let error of errorMesages.emergencyContactNumber">
+                          <div *ngIf="emergencyContactNumber.hasError(error.type) && (emergencyContactNumber.dirty || emergencyContactNumber.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+                
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Role</label>
+                        <!-- <input type="text" class="form-control" disabled formControlName="role"  placeholder="enter the role"> -->
+                        
+                        <select class="form-control" (change)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="role">
+                          <option value="0" > No Role </option>
+                          <option *ngFor="let role of ROLE_TYPES" [value]="role.role_id" > {{ role.roleName }} </option>
+                        </select>
+
+                        <div *ngFor="let error of errorMesages.role">
+                            <div *ngIf="role.hasError(error.type) && (role.dirty || role.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Email</label>
+                      <input type="email" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="email" disabled placeholder="enter the staff email">
+                      
+                      <div *ngFor="let error of errorMesages.email">
+                          <div *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                    
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+                
+
+                <!-- <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Commission</label>
+                        <input type="text" class="form-control" disabled (keypress)="numberOnlyValidation($event)" formControlName="commission" placeholder="enter the commission">
+                        
+                        <div *ngFor="let error of errorMesages.commission">
+                            <div *ngIf="commission.hasError(error.type) && (commission.dirty || commission.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Reviews</label>
+                        <input type="text" class="form-control" disabled formControlName="reviews"  placeholder="enter the review">
+                        
+                        <div *ngFor="let error of errorMesages.reviews">
+                            <div *ngIf="reviews.hasError(error.type) && (reviews.dirty || reviews.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div> -->
+              
+
+                <!-- <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Performance</label>
+                        <input type="text" class="form-control" disabled formControlName="performance"  placeholder="enter the performence">
+                        
+                        <div *ngFor="let error of errorMesages.performance">
+                            <div *ngIf="performance.hasError(error.type) && (performance.dirty || performance.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Monthly Sales</label>
+                      <input type="text" class="form-control" disabled (keypress)="numberOnlyValidation($event)" formControlName="monthlySales"  placeholder="enter the monthly sales">
+                      
+                      <div *ngFor="let error of errorMesages.monthlySales">
+                          <div *ngIf="monthlySales.hasError(error.type) && (monthlySales.dirty || monthlySales.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div> -->
+                
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Password</label>
+                        <input type="text" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="password"  placeholder="enter the password">
+                        
+                        <div *ngFor="let error of errorMesages.password">
+                            <div *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Employee Bio</label>
+                        <input type="text" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="employeeBio"  placeholder="enter the emplpoyee bio">
+                        
+                        <div *ngFor="let error of errorMesages.employeeBio">
+                            <div *ngIf="employeeBio.hasError(error.type) && (employeeBio.dirty || employeeBio.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+                
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Image</label>
+                        <input type="file" class="form-control" (change)="_updateFormValue()" formControlName="employeeImg" (change)="_selectFile($event)" >
+                        
+                        <div *ngFor="let error of errorMesages.employeeImg">
+                            <div *ngIf="employeeImg.hasError(error.type) && (employeeImg.dirty || employeeImg.touched)">
+                              <div class="alert alert-danger">
+                                {{ error.message}}.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        
+                    </div>
+                </div>
+               
+                <div class="row my-row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                    <input type="submit" [disabled]="!UPDATE_STAFF_FORM.valid"  class="btn btn-info submit-button"  value="Submit">
+                  </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<div class="modal message-model" tabindex="-1"  role="dialog" [ngStyle]="{'display': MODEL_OPEN ? 'block' : 'none' }">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+
+          <div class="right-icon">
+            <i class="fa fa-check rights" aria-hidden="true"></i>
+          </div>
+          <div class="modal-header mod-header"></div>
+          <div class="modal-body mod-conetnt">
+            
+            <span> Staff updated successfully </span>
+            <div class="confirm-div">
+              <button class="btn btn-success confirm" (click)="_closeModel()">Confirm</button>
+            </div>
+            
+          </div>
+          <div class="modal-footer mod-footer">
+              
+          </div>
+      </div>
+  </div>
+</div>

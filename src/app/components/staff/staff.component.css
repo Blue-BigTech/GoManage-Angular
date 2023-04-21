@@ -1,0 +1,285 @@
+.custom {
+
+    background-color: whitesmoke;
+}
+
+.card-body {
+
+    padding: 10px;
+}
+
+
+
+.add-staff-button{
+    margin-top: 20px !important;
+    float: right !important;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background-color: #453666;
+    color: white;
+}
+
+.performence {
+
+    display: flex;
+}
+.ellipsis {
+    margin-left: 30px;
+    margin-top: 10px;
+    font-size: 20px;
+}
+.staff-image {
+
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.side-top {
+
+    padding-top: 20px;
+}
+
+.progress-bar-div {
+
+    margin-top: 0px;
+    text-align: center;
+}
+.stafinfo {
+    text-align: center;
+}
+.close-staff-sidebar {
+
+    float: right;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.side-staff-image {
+    position: relative;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.staff-name {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.staff-role {
+    text-align: center;
+}
+
+.side-staff-info {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.side-staff-info .btn {
+    font-size: 10px;
+    padding: 3px 5px;
+}
+
+.personal-detail {
+
+    margin-left: 5px;
+}
+
+.staff-service-duties  {
+    margin-top: 25%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.list-service-add-plus {
+    margin-top: 10px;
+    height: 100px;
+}
+
+.list-service {
+    border-radius: 20px;
+    background-color: #23ccef;
+    color: white;
+}
+
+.add-service {
+    border-radius: 50%;
+    background-color: #341c5b;
+    color: white;
+    border: 1px solid #341c5b;
+}
+
+.alert {
+    position: relative;
+    margin-top: 4px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.dropdown-menu:after, .dropdown-menu:before {
+    left: 5px !important;
+}
+i.fa.fa-ellipsis-v.ellipsis {
+    margin: 0px !important;
+    padding: 0px;
+    color: #000000;
+}
+button.btn.btn-primary.dropdown-toggle {
+    border: none;
+    padding: 0px;
+    background: none !important;
+}
+
+a.dropdown-item {
+    display: block;
+    padding-left: 7px;
+}
+
+.progress-bar-div[_ngcontent-axj-c118] {
+    margin-top: 0px !important;
+    margin-top: -9px;
+    text-align: center;
+}
+.progress-bar-div {
+    position: absolute;
+    bottom: 41px;
+    left: 53px;
+}
+.row.side-staff-info_1 {
+    display: flex;
+    justify-content: center;
+}
+.dropdown-menu_staflist,.dropdown_staflist {
+    display: flex;
+}
+button.dropdown-item.btn.btn-info,button.dropdown-item.btn.btn-danger{
+    padding: 0px;
+}
+h4.infohead {
+    margin: 0 0 0 0;
+    font-weight: 500;
+}
+
+tr.ng-star-inserted td {
+    font-size: 15px;
+}
+.table>thead>tr>th {
+  color: #1f1c1c !important;
+}
+table#DataTables_Table_0 {
+  box-shadow: 0 0 2px;
+  border-radius: 8px !important;
+}
+
+/* 
+  @media only screen and (max-width: 1206px) {
+    .progress-bar-div {
+        left: 47px;
+    }
+  }
+  
+@media only screen and (max-width: 1269px) {
+    tr.staf_details {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .progress-bar-div {
+        left: 58px;
+    }
+  }
+  @media only screen and (max-width: 1215px) {
+    .progress-bar-div {
+        left: 44px;
+    }
+  }
+  @media only screen and (max-width: 1188px) {
+    .tafinfoclick {
+        display: inline-grid;
+    }
+  }
+
+  @media only screen and (max-width: 1116px) {
+    .progress-bar-div {
+        left: 39px;
+    }
+  }
+  @media only screen and (max-width: 1099px) {
+    .progress-bar-div {
+        left: 29px;
+    }
+  }
+
+  @media only screen and (max-width: 1020px) {
+    .progress-bar-div {
+        left: 24px;
+    }
+  }
+  @media only screen and (max-width: 1033px) {
+    .progress-bar-div {
+        left: 17px;
+    }
+  }
+  
+  @media only screen and (max-width: 991px) {
+    .progress-bar-div {
+        left: 0px;
+        right: 172px;
+    }
+    .row.side-staff-info {
+        display: block;
+    }
+    .row.staff-service-duties {
+        margin-top: 14px !important;
+    }
+  }
+ 
+  @media only screen and (max-width: 646px) {
+    .prgrestab {
+        display: table-caption;
+    }
+    .progress-bar-div {
+        right: -130px;
+        top: 47px;
+    }
+    .row_stafmid {
+        display: flex;
+        justify-content: center;
+    }
+    .row_stafmid {
+        margin-left: 42px;
+    }
+  }
+
+  @media only screen and (max-width:   446px) {
+    .alert.alert-danger {
+        padding: 0px;
+        font-size: 9px;
+    }
+  }
+  @media only screen and (max-width: 398px) {
+    .main-content {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+  }
+
+
+   */

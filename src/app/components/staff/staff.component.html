@@ -1,0 +1,257 @@
+<!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > {{ SPINNER_TEXT }} </p>
+</ngx-spinner>
+
+<div class="main-content">
+
+    <nav #navbar class="navbar navbar-default  custom">
+        <div class="container-fluid">
+            
+            <app-staff-header-menu></app-staff-header-menu>
+            
+
+            <div class="row ">
+                
+                <div class="col-md-12">
+                    <h4><b>Staff list</b></h4>
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <button class="btn btn-info add-staff-button" [routerLink]="['add']">+ Add New Staff</button>
+                            <div>
+
+                                <table class="table client-table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" >
+                                    <thead>
+                                    <tr class="staf_details">
+                                        <th><b>Name</b></th>
+                                        <th><b>Role</b></th>
+                                        <th><b>Monthly Sales</b></th>
+                                        <th><b>Commission</b></th>
+                                        <th><b>Reviews</b></th>
+                                        <th><b>Performance</b></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let staff of STAFF_LIST">
+                                        
+                                        <td (click)="_showDetails(staff.employee_id)"> <img  [src]="staff.employeeImg" class="staff-image"> {{ staff.firstName + ' ' + staff.lastName }} </td>
+                                        <td> {{ staff.role_name }} </td>
+                                        <td> {{ staff?.monthlySales != 'null' ?  staff.monthlySales : '' }} </td>
+                                        <td> {{ staff?.commission != 'null' ?  staff.commission : '' }} </td>
+                                        <td> {{ staff?.reviews != 'null' ?  staff.reviews : '' }} </td>
+                                        <td class="performence"> 
+                                            {{ staff?.performance != 'null' ?  staff.performance : '' }}
+                                            <circle-progress
+                                                [percent]="75"
+                                                [radius]="10"
+                                                [outerStrokeWidth]="16"
+                                                [innerStrokeWidth]="8"
+                                                [outerStrokeColor]="'#e05d06'"
+                                                [innerStrokeColor]="'#C7E596'"
+                                                [animation]="true"
+                                                [animationDuration]="300"
+                                                [showSubtitle]="false"
+                                                [showInnerStroke]="false"
+                                                [outerStrokeWidth]="2"
+                                                [titleFontSize]="7"
+                                                ></circle-progress> 
+                                            <!-- <i class="fa fa-ellipsis-v ellipsis" style="cursor: pointer;"></i> -->
+
+                                            <div class="dropdown">
+                                                <button type="button"  class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-v ellipsis" style="cursor: pointer;"></i>
+                                                </button>
+                                                <div class="dropdown-menu"  style="min-width: 69px;margin: auto; padding-left: 5px;">
+                                                <button class="dropdown-item btn btn-info" title="edit staff" [routerLink]="['/staff/edit/', staff.employee_id]"><i class="fa fa-pencil"></i></button>
+                                                <button class="dropdown-item btn btn-danger" title="delete staff" (click)="_deleteStaff(staff.employee_id)"><i class="fa fa-trash"></i></button>
+                                                
+                                                </div>
+                                            </div>
+
+                                        </td>
+                            
+                                    </tr>
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                    
+                
+                <!-- <div class="col-md-4">
+                    <h4><b>Staff Profile</b></h4>
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <div class="row side-top">
+                                <div class="row_staftop">
+                                <div class="col-md-12">
+                                    <i class="fa fa-close close-staff-sidebar"></i>
+                                </div>
+                                </div>
+                                <div class="row_stafmid">
+                                <div class="col-md-12 prgrestab">
+                              
+                                     
+                                    <img [src]="IMAGE" class="side-staff-image">
+                                    <div class="staff-name">
+                                        {{ NAME }}
+                                    </div>
+                                    <div class="staff-role">
+                                        Owner
+                                    </div>
+                                    <div class="progress-bar-div">
+                                        <circle-progress
+                                        [percent]="PERFORMENCE"
+                                        [radius]="20"
+                                        [outerStrokeWidth]="16"
+                                        [innerStrokeWidth]="8"
+                                        [outerStrokeColor]="'#e05d06'"
+                                        [innerStrokeColor]="'#C7E596'"
+                                        [animation]="true"
+                                        [animationDuration]="300"
+                                        [showSubtitle]="false"
+                                        [showInnerStroke]="false"
+                                        [outerStrokeWidth]="4"
+                                        ></circle-progress>
+                                    </div>
+                                </div>
+                                </div>
+                                
+                            </div>
+                            
+                           
+
+                            <div class="row  side-staff-info">
+                                <h4 class="infohead">Staff Information</h4>
+                                <div class="tafinfoclick">
+                                <div class="col-md-4">
+                                    <button class="btn btn-info btn-sm  personal-detail" > Personal Details</button>
+                                </div>
+
+                                <div  class="col-md-4">
+                                    <button class="btn btn-info btn-sm"> Customer Reviews</button>
+                                </div>
+
+                                <div  class="col-md-4">
+                                    <button class="btn btn-info btn-sm"> Staff file</button>
+                                </div>
+                            </div>
+                        </div>
+
+                            <div class="row staff-service-duties">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    Staff Services & Duties
+                                </div>
+                            </div>
+
+                            <div class="row list-service-add-plus">
+                                <div class="col-md-6">
+                                    <button class="btn btn-info btn-sm list-service"> List of services</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-info btn-sm add-service"> + </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div> -->
+                    
+            </div>
+            
+        </div>
+    </nav>
+
+
+    <!-- Add staff -->
+
+    <div class="modal" tabindex="-1"  role="dialog" [ngStyle]="{'display': ADD_STAFF ? 'block' : 'none'}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Staff</h4>
+                </div>
+                <div class="modal-body ">
+                    
+                    <form >
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="NAME" placeholder="enter the staff name">
+                                <div class="alert alert-danger" role="alert" *ngIf="NAME_ERROR !=''">
+                                    {{ NAME_ERROR }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label>Last Name</label>
+                                <input type="email" class="form-control" [(ngModel)]="EMAIL" placeholder="enter the staff email">
+                                <div class="alert alert-danger" role="alert" *ngIf="EMAIL_ERROR !=''">
+                                    {{ EMAIL_ERROR }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label>Phone</label>
+                                <input type="text" class="form-control" [(ngModel)]="NAME" placeholder="enter the staff name">
+                                <div class="alert alert-danger" role="alert" *ngIf="NAME_ERROR !=''">
+                                    {{ NAME_ERROR }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label>Date of Birth</label>
+                                <input type="email" class="form-control" [(ngModel)]="EMAIL" placeholder="enter the staff email">
+                                <div class="alert alert-danger" role="alert" *ngIf="EMAIL_ERROR !=''">
+                                    {{ EMAIL_ERROR }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label>Gender</label>
+                                <input type="text" class="form-control" [(ngModel)]="NAME" placeholder="enter the staff name">
+                                <div class="alert alert-danger" role="alert" *ngIf="NAME_ERROR !=''">
+                                    {{ NAME_ERROR }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <label>Date of Birth</label>
+                                <input type="email" class="form-control" [(ngModel)]="EMAIL" placeholder="enter the staff email">
+                                <div class="alert alert-danger" role="alert" *ngIf="EMAIL_ERROR !=''">
+                                    {{ EMAIL_ERROR }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        
+                        
+
+                        <button class="btn btn-info" (click)="_addStaffValidation()">Submit</button>
+                    </form>
+            
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" 
+                           (click)="ADD_STAFF = false" >
+                    Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

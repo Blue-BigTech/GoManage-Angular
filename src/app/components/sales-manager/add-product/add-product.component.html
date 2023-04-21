@@ -1,0 +1,224 @@
+
+<div class="main-content">
+
+    <nav #navbar class="navbar navbar-default  custom">
+        <div class="container-fluid">
+
+            <form [formGroup]="ADD_PRODUCT_FORM" (ngSubmit)="_addProduct(ADD_PRODUCT_FORM)">
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Product Name</label>
+                      <input type="text" class="form-control" formControlName="productName" autocomplete="off" placeholder="enter the product name">
+                       
+                      <div *ngFor="let error of errorMesages.productName">
+                          <div *ngIf="productName.hasError(error.type) && (productName.dirty || productName.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Brand</label>
+                      <select class="form-control" formControlName="brand"  placeholder="enter the brand">
+                        <option *ngFor="let BRAND of BRAND_LIST" [value]="BRAND.id"> {{ BRAND.name}} </option>
+                      </select>
+                      
+                      <div *ngFor="let error of errorMesages.brand">
+                          <div *ngIf="brand.hasError(error.type) && (brand.dirty || brand.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+
+                </div>
+                
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Product Description</label>
+                      <input type="text" class="form-control" formControlName="productDescription" autocomplete="off" placeholder="enter the product description">
+                      
+                      <div *ngFor="let error of errorMesages.productDescription">
+                          <div *ngIf="productDescription.hasError(error.type) && (productDescription.dirty || productDescription.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <label>Quantity</label>
+                    <input type="text" class="form-control" formControlName="quantity" (keypress)="numberOnlyValidation($event)"  placeholder="enter the quantity">
+                    
+                    <div *ngFor="let error of errorMesages.quantity">
+                        <div *ngIf="quantity.hasError(error.type) && (quantity.dirty || quantity.touched)">
+                          <div class="alert alert-danger">
+                            {{ error.message}}.
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    
+                </div>
+
+                <div class="row my-row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Price(€)</label>
+                        <input type="text" class="form-control" (keypress)="numberOnlyValidation($event)" formControlName="price" autocomplete="off" placeholder="enter the price">
+                        
+                        <div *ngFor="let error of errorMesages.price">
+                            <div *ngIf="price.hasError(error.type) && (price.dirty || price.touched)">
+                            <div class="alert alert-danger">
+                                {{ error.message}}.
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Make this product available online</label>
+                        <select class="form-control" formControlName="isAvailable"  >
+                            <option value="1">Yes</option>
+                            <option value="2">No</option>
+                        </select>
+
+                        <div *ngFor="let error of errorMesages.isAvailable">
+                            <div *ngIf="isAvailable.hasError(error.type) && (isAvailable.dirty || isAvailable.touched)">
+                            <div class="alert alert-danger">
+                                {{ error.message}}.
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+                
+
+                <div class="row my-row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                      <label>Reorder notification Quantity</label>
+                      <input type="text" class="form-control" formControlName="reorderQuantity" autocomplete="off" placeholder="enter the reorder quantity">
+                      
+                      <div *ngFor="let error of errorMesages.reorderQuantity">
+                          <div *ngIf="reorderQuantity.hasError(error.type) && (reorderQuantity.dirty || reorderQuantity.touched)">
+                            <div class="alert alert-danger">
+                              {{ error.message}}.
+
+                            </div>
+                          </div>
+                          <br>
+                      </div>
+                  </div>
+
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <label>Unit Volume</label>
+                        <input class="form-control" formControlName="unitVolume"  >
+                            
+
+                        <div *ngFor="let error of errorMesages.unitVolume">
+                            <div *ngIf="unitVolume.hasError(error.type) && (unitVolume.dirty || unitVolume.touched)">
+                            <div class="alert alert-danger">
+                                {{ error.message}}.
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <label></label>
+                        
+                        <select class="form-control" formControlName="unitMeasurement" style="margin-top: 5px;">
+                          <option value="ml">ml</option>
+                          <option value="g">g</option>
+                        </select>
+
+                        <div *ngFor="let error of errorMesages.unitMeasurement">
+                            <div *ngIf="unitMeasurement.hasError(error.type) && (unitMeasurement.dirty || unitMeasurement.touched)">
+                            <div class="alert alert-danger">
+                                {{ error.message}}.
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"></div>
+
+                </div>
+
+                <div class="row my-row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                        <label>Add Product Image</label>
+                        <input type="file" class="form-control" (change)="_selectFile($event)"  formControlName="productImage" autocomplete="off" >
+                        
+                        <div *ngFor="let error of errorMesages.productImage">
+                            <div *ngIf="productImage.hasError(error.type) && (productImage.dirty || productImage.touched)">
+                            <div class="alert alert-danger">
+                                {{ error.message}}.
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <label>Hot Product ?</label>
+                        <input 
+                            type="checkbox" 
+                            class="form-control" 
+                            formControlName="isHotProduct" 
+                            style="margin-left: -53px;"
+                            >
+                    
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                    <input type="submit" [disabled]="!ADD_PRODUCT_FORM.valid"  class="btn btn-info submit-button"  value="Submit">
+                  </div>
+                </div>
+                
+            </form>
+        </div>
+
+        
+    </nav>
+</div>
+
+<div class="modal message-model" tabindex="-1"  role="dialog" [ngStyle]="{'display': MODEL_OPEN ? 'block' : 'none' }">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+
+          <div class="right-icon">
+            <i class="fa fa-check rights" aria-hidden="true"></i>
+          </div>
+          <div class="modal-header mod-header"></div>
+          <div class="modal-body mod-conetnt">
+            
+            <span> Product added successfully! </span>
+            <div class="confirm-div">
+              <button class="btn btn-success confirm" (click)="_closeModel()">Confirm</button>
+            </div>
+            
+          </div>
+          <div class="modal-footer mod-footer">
+              
+          </div>
+      </div>
+  </div>
+</div>

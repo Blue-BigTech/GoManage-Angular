@@ -1,0 +1,373 @@
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > {{ SPINNER_TEXT }} </p>
+</ngx-spinner>
+
+<div class="main-content">
+
+    <nav #navbar class="navbar navbar-default  custom">
+        <div class="container-fluid">
+
+            <app-sales-manager-shared-header></app-sales-manager-shared-header>
+
+            <div class="row main-part">  
+                <div class="col-md-12">
+                    <div class="card">             
+                        <div class="card-body">
+                            <!-- Category text and new category button  -->
+                            <div class="row category-header-div">
+                                <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 ">
+                                    <p class="category-heading"><i class="fa fa-list" style="color:aqua; margin-right:5px;"></i>Categories</p>
+                                </div>
+
+                                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                    <button class="btn btn-info new-category" (click)="_openNewCategoryPopup()"> + Add New Category </button>
+                                </div>
+                            </div>
+
+                            <hr class="solid" style="margin-top: 0px;">
+                            <!-- Category buttons shows -->
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 categories-button">
+                                    <div *ngFor="let category_value of CATEGORIES" class="category-div">
+                                        <button 
+                                            class="btn btn-info category-name-button" 
+                                            [style.background-color]="category_value.color_name"
+                                            [style.border-color]="category_value.color_name"
+                                            (click)="_selectCategory(category_value.id)"
+                                            (dblclick)="_editCategory(category_value)"
+                                            > 
+                                                {{ category_value.categoryName }} 
+                                                <i class="fa fa-check" *ngIf="category_value.selected"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row service-list-text-btn">
+                        <div class="col-md-6">
+                            <p class="service-list-text"> Service List <i class="fa fa-sort-desc" style="margin-left:5px;"></i></p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <button class="btn btn-info add-new-service" (click)="_openNewServicePopup()"> + Add New Service </button>
+                        </div>
+                    </div>
+                    <!-- services list show -->
+                    <div class="row service-main-div">
+                        <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 service-list-div">
+                            <div class="card">
+                                <div class="card-body" style="min-height: 460px;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div 
+                                                *ngFor="let service_value of SELECTED_SERVICES_LIST"
+                                                class="service-button-name service-button-list"
+                                                (click)="_getSerceValue(service_value)"
+                                                >
+                                                <i 
+                                                    class="fa fa-circle"
+                                                    style="margin-right: 10px;"
+                                                    [style.color]="this.SELECTED_CATEGORY.color_name"
+                                                ></i>
+                                                {{ service_value.serviceName }} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                            <div class="card">
+                                <div class="card-body" style="min-height:460px; padding-top:20px;">
+                                    <form [formGroup]="UPDATE_SERVICE_FORM" (ngSubmit)="_updateService()">
+                                        <div class="service-side-input-form">
+
+                                            <div class="service-input">
+                                                <label for="service_name">Service Name</label>
+                                                <input class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="serviceName" id="service_name" placeholder="enter service name">
+                                                
+                                                <div *ngFor="let error of errorMesages.serviceName" >
+                                                    <div class="test" *ngIf="serviceName.hasError(error.type) && (serviceName.dirty || serviceName.touched)">
+                                                        <div class="alert alert-danger">
+                                                        {{ error.message}}.
+                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="service-input">
+                                                <label for="service_price">Service description</label>
+                                                <input class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="serviceDescription" id="service_decription" placeholder="enter service description">
+                                                
+                                                <div *ngFor="let error of errorMesages.serviceDescription">
+                                                    <div *ngIf="serviceDescription.hasError(error.type) && (serviceDescription.dirty || serviceDescription.touched)">
+                                                        <div class="alert alert-danger">
+                                                        {{ error.message}}.
+                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="service-input">
+                                                <label for="service_duration">Service Duration (Minutes)</label>
+                                                <input type="number" (input)="_updateFormValue()" (blur)="_updateFormValue()" formControlName="serviceDuration" (keypress)="numberOnlyValidation($event)" class="form-control" id="service_duration" >
+                                                
+                                                <div *ngFor="let error of errorMesages.serviceDuration">
+                                                    <div *ngIf="serviceDuration.hasError(error.type) && (serviceDuration.dirty || serviceDuration.touched)">
+                                                        <div class="alert alert-danger">
+                                                        {{ error.message}}.
+                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="service-input">
+                                                <label for="service_price">Service price (€)</label>
+                                                <input type="number" class="form-control" (input)="_updateFormValue()" (blur)="_updateFormValue()" (keypress)="numberOnlyValidation($event)" formControlName="servicePrice" id="service_price" placeholder="enter service price">
+                                                
+                                                <div *ngFor="let error of errorMesages.servicePrice">
+                                                    <div *ngIf="servicePrice.hasError(error.type) && (servicePrice.dirty || servicePrice.touched)">
+                                                        <div class="alert alert-danger">
+                                                        {{ error.message}}.
+                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="submit" value="update" [disabled]="!UPDATE_SERVICE_FORM.valid" class="btn btn-info update-button">
+                                            <input type="button" class="btn btn-danger delete_service" [disabled]="UPDATE_SERVICE_FORM.value.id == '' || UPDATE_SERVICE_FORM.value.id == null" (click)="_deleteService(UPDATE_SERVICE_FORM.value.id)" value="Delete">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </nav>
+</div>
+            
+<!-- New Category create Pop-up start -->
+<div class="modal" tabindex="-1"  role="dialog" [ngStyle]="{'display': NEW_CATEGORY_MODEL_OPEN ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable new-category-pop" role="document">
+        <div class="modal-content">
+           
+            <div class="modal-body ">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <h6 class="new-cat-heading">New Category</h6>
+                    </div>
+
+                    
+
+                </div>
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <input class="form-control " placeholder="Category Name..." [(ngModel)]="NEW_CATEGORY_NAME">
+                    </div>
+                </div>
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <div class="dropdown">
+                            <span>Category Colour...</span> <span class="dot-color selected-dot-color" [style.background-color]="SELECTED_COLOR.colourCode"></span>
+                            <div class="dropdown-content">
+                                <span 
+                                    class="dot-color" 
+                                    *ngFor="let colour of COLOR_LIST"
+                                    [style.background-color] = "colour.colourCode"
+                                    (click)="_selectColour(colour)"
+                                    ></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row new-category-pop-button-div">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    
+                        <button class="btn btn-success new-cat-save-btn" (click)="_createNewCategory()">Save</button>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    
+                        <button class="btn btn-danger new-cat-cancel-btn" (click)="_closeNewCategoryPopup()">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- New Category create Pop-up end -->
+
+<!-- Category edit Pop-up start -->
+
+<div class="modal" tabindex="-1"  role="dialog" [ngStyle]="{'display': EDIT_CATEGORY_MODEL_OPEN ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable new-category-pop" role="document">
+        <div class="modal-content">
+           
+            <div class="modal-body ">
+
+                <i class="fa fa-close close_edit_category_pop-up" (click)="_closeEditCategoryPopup()"></i>
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <h6 class="new-cat-heading">Edit Category</h6>
+                    </div>
+
+                    
+
+                </div>
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <input class="form-control " placeholder="Category Name..." [(ngModel)]="EDIT_CATEGORY_NAME">
+                    </div>
+                </div>
+
+                <div class="row new-cat-input">
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <div class="dropdown">
+                            <span>Category Colour...</span> 
+                            <span class="dot-color selected-dot-color" [style.background-color]="EDIT_CATEGORY_SELECTED_COLOR.colourCode"></span>
+                            <div class="dropdown-content">
+                                <span 
+                                    class="dot-color" 
+                                    *ngFor="let colour of COLOR_LIST"
+                                    [style.background-color] = "colour.colourCode"
+                                    (click)="_selectColourEditCatgory(colour)"
+                                    ></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row new-category-pop-button-div">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    
+                        <button class="btn btn-success new-cat-save-btn" (click)="_updateCategory()">Save</button>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    
+                        <button class="btn btn-danger new-cat-cancel-btn" (click)="_deleteCategory()">Delete</button>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Category edit Pop-up end -->
+
+<!-- New Service create Pop-up start -->
+<div class="modal" tabindex="-1"  role="dialog" [ngStyle]="{'display': NEW_SERVICE_MODEL_OPEN ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable new-category-pop" role="document">
+        <div class="modal-content">
+           
+            <div class="modal-body ">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <h6 class="new-cat-heading">New Service</h6>
+                    </div>
+
+                    
+
+                </div>
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <input class="form-control " placeholder="Service Name..." [(ngModel)]="NEW_SERVICE_NAME">
+                    </div>
+                </div>
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <input type="number" (keypress)="numberOnlyValidation($event)" class="form-control " placeholder="Service Duration..." [(ngModel)]="NEW_SERVICE_DURATION">
+                    </div>
+                </div>
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <input class="form-control " placeholder="Service Description..." [(ngModel)]="NEW_SERVICE_DESCRIPTION">
+                    </div>
+                </div>
+
+                <div class="row new-cat-input">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    
+                        <input type="number" class="form-control " placeholder="Service Price..." (keypress)="numberOnlyValidation($event)" [(ngModel)]="NEW_SERVICE_PRICE">
+                    </div>
+                </div>
+
+                <div class="row new-service-pop-button-div">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    
+                        <button class="btn btn-success new-cat-save-btn" (click)="_createNewService()">Save</button>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    
+                        <button class="btn btn-danger new-cat-cancel-btn" (click)="_closeNewServicePopup()">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- New Service create Pop-up end -->
+
+<!-- Success Pop-up start -->
+<div class="modal message-model" tabindex="-1"  role="dialog" [ngStyle]="{'display': SUCCESS_POP_UP ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable success-pop-up" role="document">
+        <div class="modal-content">
+  
+            <div class="right-icon">
+              <i class="fa fa-check rights" aria-hidden="true"></i>
+            </div>
+            <div class="modal-header mod-header"></div>
+            <div class="modal-body mod-conetnt">
+              
+              <span> {{ SUCCESS_POP_UP_MESSAGE }} </span>
+              <div class="confirm-div">
+                <button class="btn btn-success confirm" (click)="_closeSuccessModel()">Confirm</button>
+              </div>
+              
+            </div>
+            <div class="modal-footer mod-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Pop-up end -->

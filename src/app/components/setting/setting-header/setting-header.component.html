@@ -1,0 +1,6 @@
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main-heading">
+        <div class="heading" *ngFor="let routing of ROUTE_URLS" [class.active]="routing.url == CURRENT_ROUTE_LINK" [routerLink]="routing.is_working ? [routing.url] : [CURRENT_ROUTE_LINK]"> {{ routing.value }} </div>
+    </div>
+</div>    

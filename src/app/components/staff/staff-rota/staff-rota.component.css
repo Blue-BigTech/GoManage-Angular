@@ -1,0 +1,277 @@
+
+.custom {
+
+    border-radius: 15px !important;
+    background-color: unset !important;
+    border-radius: unset !important;
+}
+
+.table-div {
+    padding-top: 45px !important;
+    position: relative;
+    background-color: hsla(0,0%,100%,.96);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.image-class {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.badge {
+    
+    display: flex;
+    align-items: center;
+    min-width: 114px;
+    justify-content: center;
+    padding: 0 0px 0 10px !important;
+    margin-top: 3px;
+    min-height: 32px;
+}
+.badge-active {
+    color: #fff;
+    background-color: #453666 !important;
+}
+
+
+.leave-day-active {
+    color: #fff;
+    /* background-color: #f9ae5b !important; */
+}
+
+.staff-day {
+    min-width: 110px !important;
+}
+
+.delete-shift {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.still-working {
+    margin-top: 15px;
+}
+
+.add-shift {
+    color: blue;
+    margin-top: 5px;
+}
+
+.cancel {
+    margin-top: 20px;
+}
+.modal {
+    overflow-y: scroll !important;  
+}
+
+/* .navbar>div {
+    position: unset !important; 
+} */
+
+.model-button {
+    background-color: #3c2c60;
+    color: white;
+}
+
+.date-picker {
+    width: 250px;
+    float: right;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    border: 1px solid;
+    height: 49px;
+    border-radius: 25px;
+    background: white;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.image-name {
+    display: flex;
+    width: max-content;
+}
+
+.main-div {
+    overflow: auto;
+}
+
+.editable {
+    margin-top: 10px;
+}
+
+.input-div {
+    display: inline-flex;
+}
+
+.editable-end-time {
+
+    margin-left: 5px;
+}
+
+.editable-buttons {
+    display: inline-flex;
+}
+
+.edit-timing-icon {
+    padding: 0 6px;
+    min-height: 24px;
+    width: 31%;
+    padding-top: 6px;
+}
+
+.editable-input {
+
+    border-color: #453666 !important;
+    min-width: 110px !important;
+}
+
+.weekly_hours {
+    /* display: inherit; */
+    font-weight: bold;
+}
+
+.navbar .alert {
+    border-radius: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    z-index: 3;
+    top: 0 !important;
+}
+
+
+/* Message model CSS  start*/
+
+.modal-dialog-message{
+    width: 30% !important;
+  }
+  .message-model {
+    /* /position: relative; */
+    /* top: 20% !important; */
+  }
+  
+  .right-icon {
+  
+    position: absolute;
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    margin-left: 43%;
+    top: -26px;
+    font-size: 22px;
+    padding: 2.5%;
+    border-radius: 50%;
+    background-color: #6cd038;
+  }
+  
+  .rights {
+    margin-left: 0.5rem;
+    color: white;
+  }
+  
+  .mod-header {
+  
+    border-bottom: none !important;
+  }
+  .mod-footer {
+  
+    border-bottom: none !important;
+  }
+  
+  .confirm-div {
+    margin-top: 40px !important;
+  }
+  
+  .confirm {
+    padding-right: 35px;
+    padding-left: 35px;
+    background-color: #20b61a;
+    color: white;
+  }
+  
+  .mod-conetnt{
+  
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 10px !important;
+  }
+  
+  /* Message model CSS end */
+  
+  .dayclick{
+      display: flex;
+  }
+  .clicker {
+    margin-left: auto;
+    padding-top: 18px;
+}
+.clicker button {
+    margin: 0 12px;
+    padding: 3px 15px;
+    border: 2px solid #7a5a23;
+    border-radius: 9px;
+    color: #fff;
+}
+
+button.workday {
+    background: #453666;
+    font-size: 15px;
+}
+
+button.traday {
+    background: #004965;
+}
+button.sticday {
+    background: #e96d36;
+}
+button.annuday {
+    background: #e7bc4b;
+}
+
+.save_not_disabled {
+
+    background: hsl(128deg 68% 31%) !important;
+    cursor: pointer;
+}
+
+.save_disabled {
+
+    background: hsl(128deg 21% 65%) !important;
+    cursor: pointer;
+}
+
+.cancel_not_disabled {
+
+    background: #ff0000 !important;
+    cursor: pointer;
+}
+
+.cancel_disabled {
+
+    background: #c98080 !important;
+    cursor: pointer;
+}   
+
+.clicker i {
+    margin: 0 9px;
+    border-radius: 50%;
+    padding: 11px 25px 11px 13px;
+    color: #fff;
+}
+.clicker i.fa.fa-floppy-o {
+    background-color: hsl(128deg 68% 31%);
+}
+.clicker i.fa.fa-times {
+    background: #ff0000;
+}
+@media (min-width: 768px){
+    .modal-dialog {
+        width: 40% !important;
+        margin: 30px auto;
+        top: 20%;
+    }
+}

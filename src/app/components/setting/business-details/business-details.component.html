@@ -1,0 +1,285 @@
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > {{ SPINNER_TEXT }} </p>
+</ngx-spinner>
+
+<div class="main-content">
+
+    <nav #navbar class="navbar navbar-default  custom">
+        <div class="container-fluid">
+
+            <app-setting-header></app-setting-header>
+
+            <div class="row main-part">  
+                <div class="col-md-12">
+                    <div class="business-heading col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <p class="business-heading-title">Business Details</p>
+                        <p class="business-heading-subtitle">Manage settings such as your business name and time zone</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row service-main-div">
+                                <div class="left-setting-parent col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                                    <div class="left-setting">
+                                        <form [formGroup]="UPDATE_SETTING_FORM" (ngSubmit)="_updateSetting()" novalidate>
+                                            <div class="service-side-input-form">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <div class="service-input">
+                                                            <label class="center-block">Business name
+                                                                <input class="form-control" formControlName="businessName">
+                                                            </label>
+                                                            <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['businessName'].invalid && (UPDATE_SETTING_FORM.controls['businessName'].dirty || UPDATE_SETTING_FORM.controls['businessName'].touched)">
+                                                                <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['businessName'].errors.required">
+                                                                Business name is required.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <div class="service-input">
+                                                            <label class="center-block">Business Address
+                                                                <input class="form-control" formControlName="businessAddress">
+                                                            </label>
+                                                            <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['businessAddress'].invalid && (UPDATE_SETTING_FORM.controls['businessAddress'].dirty || UPDATE_SETTING_FORM.controls['businessAddress'].touched)">
+                                                                <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['businessAddress'].errors.required">
+                                                                    Business Address is required.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <div class="service-input">
+                                                            <label class="center-block">Email
+                                                                <input class="form-control" formControlName="email">
+                                                            </label>
+                                                            <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['email'].invalid && (UPDATE_SETTING_FORM.controls['email'].dirty || UPDATE_SETTING_FORM.controls['email'].touched)">
+                                                                <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['email'].errors.required">
+                                                                Email is required.
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <div class="service-input">
+                                                            <label class="center-block">Phone
+                                                                <input class="form-control" formControlName="phone" (keypress)="numberOnlyValidation($event)">
+                                                            </label>
+                                                            <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['phone'].invalid && (UPDATE_SETTING_FORM.controls['phone'].dirty || UPDATE_SETTING_FORM.controls['phone'].touched)">
+                                                                <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['phone'].errors.required">
+                                                                Phone number is required.
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <div class="service-input">
+                                                            <label class="center-block">Company Trading Name
+                                                                <input class="form-control" formControlName="company">
+                                                            </label>
+                                                            <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['company'].invalid && (UPDATE_SETTING_FORM.controls['company'].dirty || UPDATE_SETTING_FORM.controls['company'].touched)">
+                                                                <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['company'].errors.required">
+                                                                    Company Trading Name is required.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <div class="service-input">
+                                                            <label class="center-block">Currency
+                                                                <select class="form-control m-5">
+                                                                    <option value="0">EUR</option>
+                                                                    <option value="1">NZD</option>
+                                                                    <option value="2">AUD</option>
+                                                                    <option value="3">GBP</option>
+                                                                    <option value="4">HKD</option>
+                                                                    <option value="5">SGD</option>
+                                                                    <option value="6">USD</option>
+                                                                    <option value="7">CAD</option>
+                                                                    <option value="8">INR</option>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <label>Bio</label>
+                                                <textarea class="form-control bio-input" formControlName="bio"></textarea>
+                                                <div class="test" *ngIf="UPDATE_SETTING_FORM.controls['bio'].invalid && (UPDATE_SETTING_FORM.controls['bio'].dirty || UPDATE_SETTING_FORM.controls['bio'].touched)">
+                                                    <div class="alert alert-danger" *ngIf="UPDATE_SETTING_FORM.controls['bio'].errors.required">
+                                                        Bio is required.
+                                                  </div>
+                                                </div>
+                                                <input type="submit" value="Update" class="btn update-bio">
+                                                <input type="button" class="btn cancel-bio" value="Cancel">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="right-setting col-sm-12 col-md-5 col-lg-5 col-xl-5 open-close-div">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="open-close-text"> Opening and Closing hours </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div>Sunday</div>
+                                            <div class="open-close-switch">
+                                                <label class="switch">
+                                                    <input type="checkbox" (change)="checkValue_sun()">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div class="open">{{txt_sun}}</div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="show_sun" class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <input type="time" class="form-control">
+                                            <div class="to">TO</div>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div>Monday</div>
+                                            <div class="open-close-switch">
+                                                <label class="switch">
+                                                    <input type="checkbox" (change)="checkValue_mon()">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div class="open">{{txt_mon}}</div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="show_mon" class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <input type="time" class="form-control">
+                                            <div class="to">TO</div>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div>Tuesday</div>
+                                            <div class="open-close-switch">
+                                                <label class="switch">
+                                                    <input type="checkbox" (change)="checkValue_tue()">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div class="open">{{txt_tue}}</div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="show_tue" class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <input type="time" class="form-control">
+                                            <div class="to">TO</div>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div>Wednesday</div>
+                                            <div class="open-close-switch">
+                                                <label class="switch">
+                                                    <input type="checkbox" (change)="checkValue_wed()">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div class="open">{{txt_wed}}</div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="show_wed" class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <input type="time" class="form-control">
+                                            <div class="to">TO</div>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div>Thursday</div>
+                                            <div class="open-close-switch">
+                                                <label class="switch">
+                                                    <input type="checkbox" (change)="checkValue_thr()">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div class="open">{{txt_thr}}</div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="show_thr" class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <input type="time" class="form-control">
+                                            <div class="to">TO</div>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div>Friday</div>
+                                            <div class="open-close-switch">
+                                                <label class="switch">
+                                                    <input type="checkbox" (change)="checkValue_fri()">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div class="open">{{txt_fri}}</div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="show_fri" class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <input type="time" class="form-control">
+                                            <div class="to">TO</div>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div>Saturday</div>
+                                            <div class="open-close-switch">
+                                                <label class="switch">
+                                                    <input type="checkbox" (change)="checkValue_sat()">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <div class="open">{{txt_sat}}</div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="show_sat" class="open-close-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <input type="time" class="form-control">
+                                            <div class="to">TO</div>
+                                            <input type="time" class="form-control">
+                                        </div>
+                                    </div>
+                                    <input type="button" class="btn cancel-bio" value="Cancel">
+                                    <input type="submit" value="Save Schedule" class="btn update-bio">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+            
+<!-- Success Pop-up start -->
+<div class="modal message-model" tabindex="-1"  role="dialog" [ngStyle]="{'display': SUCCESS_POP_UP ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable success-pop-up" role="document">
+        <div class="modal-content">
+  
+            <div class="right-icon">
+              <i class="fa fa-check rights" aria-hidden="true"></i>
+            </div>
+            <div class="modal-header mod-header"></div>
+            <div class="modal-body mod-conetnt">
+              
+              <span> {{ SUCCESS_POP_UP_MESSAGE }} </span>
+              <div class="confirm-div">
+                <button class="btn btn-success confirm" (click)="_closeSuccessModel()">Confirm</button>
+              </div>
+              
+            </div>
+            <div class="modal-footer mod-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Pop-up end -->

@@ -1,0 +1,229 @@
+
+<div class="main-content">
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > {{ SPINNER_TEXT }} </p>
+</ngx-spinner>
+ 
+
+  
+  <nav #navbar class="navbar navbar-default  custom">
+    <div class="container-fluid">
+
+      <div class="row" *ngIf="FILTER_SHOW"> 
+        <div  class="col-md-3">
+          <input class="form-control search-input" placeholder="search" [(ngModel)]="SEARCH_TEXT"  (keyup)="_searchBar()">
+          
+        </div>
+        <div class="col-md-3">
+          <!-- <button class="btn btn-default btn-sm active-button shadow" [class.active]="ACTIVE_BUTTON" (click)="_activeButtonFilter()">Active</button>
+          <button class="btn btn-default btn-sm inactive-button shadow" [class.active]="INACTIVE_BUTTON" (click)=" _inActiveButtonFilter()">Inctive</button> -->
+        </div>
+        
+        
+        <div class="col-md-6">
+          <button class="btn btn-default add-new-client" [routerLink]="['add']">+ Add New Client </button>
+        </div>
+
+      </div>
+
+      
+        <table class="table client-table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+        <thead>
+          <tr class="table-heading">
+            <th style="display: none;">ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Satisfaction</th>
+            <th>Email</th>
+            <th>Last visit</th>
+            <th>Active</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let value of LIST" (dblclick)="_showUser(value.email)">
+          
+            <td style="display: none;"> {{ value?.userGMID }} </td>
+            <td> {{ value?.givenName == 'null' ? '' : value?.givenName }} {{ value?.familyName == 'null' ? '' : value?.familyName }} </td>
+            <td> {{ value?.phoneMobile == 'null' ? '' : value?.phoneMobile }} </td>
+            <td> {{ value?.satisfaction }} </td>
+            <td> {{ value?.email == 'null' ? '' : value?.email}} </td>
+            <td> {{ value?.last_visit}} </td>
+            <td class="activetab"> 
+              {{ value?.status}} 
+            </td>
+            <td>
+                <div class="dropdown">
+                  <button type="button"  class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-ellipsis-v ellipsis" style="cursor: pointer;"></i>
+                  </button>
+                  <div class="dropdown-menu"style="min-width: 69px;margin: auto; padding-left: 5px;padding-right:5px;">
+                      <button class="dropdown-item btn btn-info"[routerLink]="['edit', value.email]" title="edit client"><i class="fa fa-pencil"></i></button>
+                      <button class="dropdown-item btn btn-danger" (click)="_deleteUser(value.email)" title="delete client"><i class="fa fa-trash"></i></button>
+                      
+                  </div>
+              </div>
+             </td>     
+          </tr>
+        </tbody>
+
+      </table>
+
+    
+
+    </div>
+  </nav>
+    
+  <div class="modal" tabindex="-1"  role="dialog" [ngStyle]="{'display': MODEL_OPEN ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-scrollable model-transaction" role="document">
+        <div class="modal-content">
+           
+            <div class="modal-body ">
+              <div class="row">
+                <div class="col-md-4 col-sm-4 first">
+                  <img src="https://media.istockphoto.com/id/1280385511/photo/colorful-background.jpg?s=1024x1024&w=is&k=20&c=vd0BzayI498v8pOGlhzbvTiNpNf7HF5dClK4Qvy4Jac="   class="rounded mx-auto d-block" class="profile-image">
+                    <h5><b> {{ POP_NAME }} </b></h5>
+                    
+                    <span> {{ POP_EMAIL }} </span>
+                    <span>Gender: Male</span>
+                    <span>Date of birth: 19/09/1986</span>
+                    <span>Last booking: 20/05/2022</span>
+                    
+                </div>
+                <div class="col-md-8 col-sm-8 second"> 
+                  <div>
+                    <span class="heading">Client Information</span>
+                    <i class="fa fa-close" style="cursor: pointer; float: right; font-size: 20px;" (click)="_closeModel()"></i>
+                  </div>
+                  
+                  <div class="tabs-btn">
+                  	<button class="btn btn-info tabs active-tabs" [class.active-tabs]="NOTES" (click)="_changeTabs(1)">Notes </button>
+                    <button class="btn btn-info tabs " [class.active-tabs]="TRANSACTION" (click)="_changeTabs(2)">Transaction </button>
+                    <button class="btn btn-info tabs " [class.active-tabs]="REVIEWS" (click)="_changeTabs(3)">GoManage Star Rating </button>
+                  </div>
+
+                  <!-- Notes List -->
+
+                  <div class="information"  *ngIf="NOTES">
+
+                    <div class="inner-info">
+                      <div class="info_date">
+                        <input type="datetime-local" [(ngModel)]="ADD_NOTE_DATE">
+                        <input type="text" [(ngModel)]="ADD_NOTE_COMMENT">
+                      </div>
+                      <i class="fa fa-save save-note"  (click)="_addNote()"></i>
+                      
+                    </div>
+                  
+                  <div class="inner-info" *ngFor="let note of CLIENT_NOTES; let i = index">
+                    <div class="info_date">
+                      <input type="datetime-local" [value]="note.date_time" disabled >
+                      <input type="text" [value]="note.comment" (input)="_noteInputChange( note.id , i ,'comment' , $event.target.value)">
+                    </div>
+                    <i class="fa fa-save save-note"  (click)="_updateNote(note.id)"></i>
+                    <i class="fa fa-trash delete-note" (click)="_deleteNote(note.id)"></i>
+                  </div>
+
+                </div>
+
+                  <!-- Transaction List -->
+
+                  <div class="information" *ngIf="TRANSACTION">
+                    
+                    <!-- <div class="inner-info" >
+                      <div class="info_date">
+                        <input type="datetime-local" [(ngModel)]="ADD_TRANSACTION_DATE">
+                        <input  type="text" 
+                                [(ngModel)]="ADD_TRANSACTION_SERVICES"  
+                                class="services" 
+                                style="border-right: 1px solid;width: 46%;"
+                                
+                                >
+                        <input type="text" [(ngModel)]="ADD_TRANSACTION_PRICE" style="width: 17%;" >
+                      </div>
+                      <i class="fa fa-save save-note"  (click)="_addTransaction()"></i>
+                    </div> -->
+
+                    <div class="no-transaction-found" *ngIf="TRANSACTION_LIST.length == 0">
+                      No Transaction Found
+                    </div>
+
+                    <div class="inner-info" *ngFor="let transaction of TRANSACTION_LIST; let i = index">
+                      <div class="info_date">
+                        <input  type="datetime-local" 
+                                disabled 
+                                (input)="_transactionInputChange( transaction.id , i ,'date_time' , $event.target.value)"
+                                [value]="transaction.transaction_date"
+                                >
+                        <input  type="text" 
+                                [value]="transaction.transaction_name" 
+                                class="services" 
+                                readonly
+                                style="border-right: 1px solid;width: 46%;"
+                                (input)="_transactionInputChange( transaction.id , i ,'services_name' , $event.target.value)"
+                                >
+                        <input  type="text" 
+                                [value]="'€'+ transaction.transaction_value" 
+                                style="width: 17%;" 
+                                readonly
+                                (input)="_transactionInputChange( transaction.id , i ,'price' , $event.target.value)"
+                                >
+                      </div>
+                      <!-- <i class="fa fa-save save-note"  (click)="_updateTransaction(transaction.id)"></i> -->
+                      <!-- <i class="fa fa-trash delete-note" (click)="_deleteTranaction(transaction.id)"></i> -->
+                    </div>
+                  </div>
+
+                  <!-- Start rating List -->
+
+                  <div class="information" *ngIf="REVIEWS">
+                    <div class="full_ine" *ngFor="let review of this.CLIENT_REVIEWS">
+                    <p class="rating-date-time"> {{ review.time }} {{ review.date }} </p>
+                    <p class="rating-comment"> {{ review.comment }} </p>   
+                    <p class="ine2 rating"> 
+                      <span 
+                        class="fa star-rating-checked" 
+                        *ngFor="let rating_value of [1 , 2, 3 ,4 , 5]" 
+                        [ngClass]="rating_value <= review.rating ? 'fa-star' : 'fa-star-o'"
+                        
+                        ></span>
+                     
+                    </p>
+                    </div>
+
+
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+     
+</div>
+
+<!-- Message Model -->
+
+<div class="modal message-model" tabindex="-1"  role="dialog" [ngStyle]="{'display': MESSAGE_MODEL_OPEN ? 'block' : 'none' }">
+  <div class="modal-dialog modal-dialog-message modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+
+          <div class="right-icon">
+            <i class="fa fa-check rights" aria-hidden="true"></i>
+          </div>
+          <div class="modal-header mod-header"></div>
+          <div class="modal-body mod-conetnt">
+            
+            <span> {{ MESSAGE_MODEL_TEXT }} </span>
+            <div class="confirm-div">
+              <button class="btn btn-success confirm" (click)="_closeMessageModel()">Confirm</button>
+            </div>
+            
+          </div>
+          <div class="modal-footer mod-footer">
+              
+          </div>
+      </div>
+  </div>
+</div>
+
+

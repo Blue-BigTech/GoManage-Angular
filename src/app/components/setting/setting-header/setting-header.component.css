@@ -1,0 +1,24 @@
+.main-heading {
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.heading {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.active {
+    border-bottom: 2px solid;
+    color: #262872;
+    font-weight: 700;
+}
+
+@media only screen and (max-width: 763px) {
+    .heading {
+        margin-left: 18px !important;
+        margin-top: 12px !important;
+    }
+  }
+

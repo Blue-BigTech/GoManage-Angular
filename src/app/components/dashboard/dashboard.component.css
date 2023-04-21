@@ -1,0 +1,192 @@
+
+
+    /* .e-non-work-day {
+      background-color: #aa3c3c !important;
+    }
+
+    .e-readonly-cell {
+      pointer-events: none;
+      background-color: gray !important;
+    }
+    
+    .e-readonly-cell .e-appointment {
+      pointer-events: auto;
+    }
+
+    .e-work-cells .e-alternate-cells {
+      background-color: #aa3c3c !important;
+    }
+
+    .e-appointment {
+      height: fit-content !important;
+      width: fit-content !important;
+    }
+
+    .e-day-wrapper {
+
+      height: fit-content !important;
+      width: fit-content !important;
+    } */
+
+/* Cell width height adjust start*/
+
+    
+.schedule-cell-dimension.e-schedule .e-vertical-view .e-date-header-wrap table col,
+.schedule-cell-dimension.e-schedule .e-vertical-view .e-content-wrap table col {
+    width: 200px;
+}
+
+.schedule-cell-dimension.e-schedule .e-vertical-view .e-time-cells-wrap table td,
+.schedule-cell-dimension.e-schedule .e-vertical-view .e-work-cells {
+    height: 50px;
+}
+
+.schedule-cell-dimension.e-schedule .e-month-view .e-work-cells,
+.schedule-cell-dimension.e-schedule .e-month-view .e-date-header-wrap table col {
+    width: 200px;
+}
+
+.schedule-cell-dimension.e-schedule .e-month-view .e-work-cells {
+    height: 50px;
+}
+.e-schedule .e-vertical-view .e-resource-cells {
+  background: white !important;
+  border-style: none !important;
+  border-width: unset !important;
+  border-bottom: 1px solid rgba(0,0,0,.12) !important;
+}
+.e-schedule .e-vertical-view .e-left-indent-wrap table tbody td.e-resource-cells{
+  height: 77px;
+}
+
+    /* Cell width height adjust end */
+    /* day and week text style */
+.e-schedule .e-schedule-toolbar .e-tbar-btn .e-tbar-btn-text {
+  cursor: pointer;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #493569 !important;
+  background-color: white !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  font-weight: bold;
+}
+.e-schedule .e-vertical-view .e-day-wrapper .e-appointment{
+  border-radius: 8px !important;
+  width: 100% !important;
+  height: 50px !important;
+}
+/* toolbar active item style */
+.e-schedule .e-schedule-toolbar .e-active-view .e-icons, .e-schedule .e-schedule-toolbar .e-active-view .e-tbar-btn-text{
+  background-color: #493569 !important;
+  color: white !important;
+  border-radius: 8px;
+}
+/* toolbar item date picker style */
+.e-schedule .e-schedule-toolbar .e-toolbar-items .e-toolbar-item.e-date-range .e-tbar-btn .e-tbar-btn-text{
+  font-size: 14px;
+  text-transform: none;
+  background-color: white !important;
+  color: #493569 !important;
+  font-weight: bold;
+}
+/* schedule style */
+.e-schedule{
+  background-color: #f5f5f5 !important;
+  border: unset !important;
+  border-radius: unset !important;
+}
+/* has error */
+/* schedule toolbar style */
+.e-schedule .e-schedule-toolbar .e-toolbar-items.e-tbar-pos{
+  border-radius: 15px;
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1);  */
+  background-color: white;
+  margin-bottom: 8px;
+  padding-top: 10px;
+  /* padding-bottom: 10px; */
+  height: 60px !important;
+  min-height: 60px !important;
+}
+/* has error */
+.e-schedule .e-schedule-toolbar{
+  background: none !important;
+  padding-top: 1px !important;
+  box-shadow: none !important;
+}
+.e-toolbar .e-toolbar-item .e-tbar-btn.e-btn{
+  background: white;
+  border: none;
+}
+.e-toolbar .e-toolbar-item .e-tbar-btn.e-btn:hover{
+  background: white;
+  border: none;
+}
+/* toolbar padding left  */
+.e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-left{
+  margin-left: 20px;
+}
+.e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-right{
+  margin-right: 20px;
+}
+/* date picker icon hidden */
+.e-schedule .e-schedule-toolbar .e-toolbar-items .e-tbar-btn.e-btn.e-tbtn-txt .e-icons.e-icon-right.e-btn-icon.e-icon-down-arrow{
+  display: none;
+}
+/* schedule side row */
+.e-schedule .e-vertical-view .e-content-wrap, .e-schedule .e-vertical-view .e-time-cells-wrap{
+  /* border-radius: 17px;
+  margin-right: 20px; */
+}
+/* schedule header bar image and name style */
+.e-schedule .template-wrap-content .resource-details{
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+}
+.e-schedule .template-wrap-content .resource-details:hover{
+  cursor: pointer;
+}
+.avatar{
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 5px;
+  border: 2px solid #493569;
+  padding: 2.5px;
+}
+.avatar:hover{
+  cursor: pointer;
+}
+.avatar-div{
+  display: inline-block;
+}
+.left-button .e-edit{
+  font-size:large;
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: mediumblue;
+}
+.right-button .e-delete{
+  font-size:large;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.main-panel .main-content{
+  padding: unset !important;
+}   
+.e-time-zone-container{
+  display: none !important;
+}
+.e-control.e-recurrenceeditor.e-lib.schedule-drag-drop.schedule-group-custom-work-days.schedule-cell-dimension{
+ display: none !important;
+}
+
+
+  

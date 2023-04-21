@@ -1,0 +1,17 @@
+.hide {
+    display: none;
+}
+.img-logo {
+    width: 150px;
+    height: auto;
+}
+.logo {
+    display: flex !important;
+    justify-content: center !important;
+}
+.sidebar-wrapper{
+    background: #361b5e !important;
+}
+.sidebar{
+    background: #532599 !important;
+}

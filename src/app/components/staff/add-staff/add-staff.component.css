@@ -1,0 +1,151 @@
+form {
+  margin-top: 40px;
+}
+
+
+.alert {
+    /* position: relative; */
+    margin-top: 4px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.alert-danger {
+    color: #721c24;
+    position: unset !important;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    width: 95%; 
+}
+
+.alert-success {
+    color: #006e2c;
+    background-color: #ccf1db;
+    border-color: #b3e9c9;
+}
+
+.submit-button {
+  background-color: #473368 !important;
+  color: #fff;
+  padding: 6px 45px;
+  margin-bottom: 23px !important;
+}
+
+.my-row {
+  margin-bottom: 20px;
+}
+
+.custom {
+  box-shadow: 0 0 4px 0px;
+  border-radius: 15px;
+} 
+
+.form-control {
+  border: 1px solid #0000007a !important;
+} 
+
+.modal-dialog{
+  width: 30% !important;
+}
+.message-model {
+  /* /position: relative; */
+  top: 20% !important;
+}
+
+.right-icon {
+
+  position: absolute;
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
+  margin-left: 43%;
+  top: -26px;
+  font-size: 22px;
+  padding: 2.5%;
+  border-radius: 50%;
+  background-color: #6cd038;
+}
+
+.rights {
+  margin-left: 0.5rem;
+  color: white;
+}
+
+.mod-header {
+
+  border-bottom: none !important;
+}
+.mod-footer {
+
+  border-bottom: none !important;
+}
+
+.confirm-div {
+  margin-top: 40px !important;
+}
+
+.confirm {
+  padding-right: 35px;
+  padding-left: 35px;
+  background-color: #20b61a;
+  color: white;
+}
+
+.mod-conetnt{
+
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 10px !important;
+}
+
+/* @media only screen and (max-width: 1244px) {
+    .alert-danger {
+        width: 93%;
+    }
+  }
+  @media only screen and (max-width:    1014px) {
+    .alert-danger {
+        width: 92%;
+    }
+  }
+ 
+  @media only screen and (max-width:  978px) {
+    .alert-danger {
+        width: 94%;
+    }
+  }
+  @media only screen and (max-width:  850px) {
+    .alert-danger {
+        width: 93%;
+    }
+  }
+  @media only screen and (max-width:   724px) {
+    .alert-danger {
+        width: 91%;
+    }
+  }
+  @media only screen and (max-width:   552px) {
+    .alert-danger {
+        width: 88%;
+    }
+  }
+  @media only screen and (max-width:   446px) {
+    .alert.alert-danger {
+        padding: 0px;
+        font-size: 9px;
+    }
+  }
+  @media only screen and (max-width:   416px) {
+    .alert-danger {
+        width: 84%;
+    }
+  }
+  @media only screen and (max-width:   320px) {
+    .alert-danger {
+        width: 79%;
+        padding: 2px 0px 2px 3px;
+    }
+  } */
+  

@@ -1,0 +1,282 @@
+{
+  "employees": [
+    {
+      "text": "Susan",
+      "id": 1,
+      "color": "#ea7a57",
+      "workDays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "startHour": "08:00",
+      "endHour": "15:002"
+    },
+    {
+      "text": "Susan",
+      "id": 1,
+      "color": "#ea7a57",
+      "workDays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "startHour": "08:00",
+      "endHour": "15:002"
+    },
+    {
+      "text": "Susan",
+      "id": 1,
+      "color": "#ea7a57",
+      "workDays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "startHour": "08:00",
+      "endHour": "15:002"
+    },
+    {
+      "text": "Susan",
+      "id": 1,
+      "color": "#ea7a57",
+      "workDays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "startHour": "08:00",
+      "endHour": "15:002"
+    },
+    {
+      "text": "Susan",
+      "id": 1,
+      "color": "#ea7a57",
+      "workDays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "startHour": "08:00",
+      "endHour": "15:002"
+    }
+  ],
+  "bookings": [
+    {
+      "Id": 1,
+      "Subject": "Cut",
+      "StartTime": "",
+      "EndTime": "",
+      "IsAllDay": false,
+      "ClientId": 1,
+      "Description": "Testing Description"
+    }, {
+      "Id": 2,
+      "Subject": "Cut",
+      "StartTime": "",
+      "EndTime": "",
+      "IsAllDay": false,
+      "ClientId": 1,
+      "Description": "Testing Description"
+    }
+  ],
+  "staff": [
+    {
+      "id": "1",
+      "firstName": "Jade",
+      "lastName": "Costello",
+      "email": "Jade.Costello@jadeamber.com",
+      "dateOfBirth": "01/02/1234",
+      "password": "password123",
+      "role": "management",
+      "monthlySales": "200",
+      "commission": "€343",
+      "reviews": "5 stars",
+      "performance": "30",
+      "performedServices": [
+        "Color",
+        "Haircut"
+      ]
+    },
+    {
+      "id": "2",
+      "firstName": "martha",
+      "lastName": "McDonagh",
+      "email": "Jade.Costello@jadeamber.com",
+      "dateOfBirth": "01/02/1234",
+      "password": "password123",
+      "role": "management",
+      "monthlySales": "200",
+      "commission": "€343",
+      "reviews": "5 stars",
+      "performance": "30",
+      "performedServices": [
+        "trim",
+        "blow torch"
+      ]
+    },
+    {
+      "id": "3",
+      "firstName": "timmy",
+      "lastName": "McDonagh",
+      "email": "Jade.Costello@jadeamber.com",
+      "dateOfBirth": "01/02/1234",
+      "password": "password123",
+      "role": "management",
+      "monthlySales": "200",
+      "commission": "€343",
+      "reviews": "5 stars",
+      "performance": "30",
+      "performedServices": [
+        "Haircut"
+      ]
+    },
+    {
+      "id": "4",
+      "firstName": "mary",
+      "lastName": "McDonagh",
+      "email": "Jade.Costello@jadeamber.com",
+      "dateOfBirth": "01/02/1234",
+      "password": "password123",
+      "role": "management",
+      "monthlySales": "200",
+      "commission": "€343",
+      "reviews": "5 stars",
+      "performance": "30",
+      "performedServices": [
+        "Color",
+        "Haircut",
+        "blowdry"
+      ]
+    },
+    {
+      "id": "5",
+      "firstName": "sarah",
+      "lastName": "McDonagh",
+      "role": "management",
+      "email": "Jade.Costello@jadeamber.com",
+      "dateOfBirth": "01/02/1234",
+      "password": "password123",
+      "confirmPassword": "password123"
+    },
+    {
+      "id": "6",
+      "firstName": "kathy",
+      "lastName": "McDonagh",
+      "role": "management",
+      "email": "Jade.Costello@jadeamber.com",
+      "dateOfBirth": "01/02/1234",
+      "password": "password123",
+      "confirmPassword": "password123"
+    },
+    {
+      "id": "7",
+      "firstName": "Theressa",
+      "lastName": "McDonagh",
+      "role": "Management",
+      "email": "Jade.Costello@jadeamber.com",
+      "dateOfBirth": "2022-02-01",
+      "password": "password123",
+      "confirmPassword": "password123"
+    }
+  ],
+  "staffServices": [
+    "Blow Dry",
+    "Colour",
+    "Wax",
+    "Cut",
+    "Eye Brows"
+  ],
+  "clients": [
+    {
+      "name": "John Cena",
+      "phoneNumber": "087-2673380",
+      "satisfactionLevel": "Not Happy",
+      "emailAddress": "me@me.com",
+      "lastVisit": "12/02/2021",
+      "dateOfBirth": "12/02/2000",
+      "activeStatus": "Active",
+      "clientImage": "img1.png",
+      "address": "123 fake street"
+    },
+    {
+      "name": "The Rock",
+      "phoneNumber": "087-2673380",
+      "satisfactionLevel": "Happy",
+      "emailAddress": "me@me.com",
+      "lastVisit": "12/02/2021",
+      "dateOfBirth": "12/02/2000",
+      "activeStatus": "Active",
+      "clientImage": "img1.png",
+      "address": "123 fake street"
+    },
+    {
+      "name": "Undertaker",
+      "phoneNumber": "087-2673380",
+      "satisfactionLevel": "OK",
+      "emailAddress": "me@me.com",
+      "lastVisit": "12/02/2021",
+      "dateOfBirth": "12/02/2000",
+      "activeStatus": "Inactive",
+      "clientImage": "img1.png",
+      "address": "123 fake street"
+    },
+    {
+      "name": "Cain",
+      "phoneNumber": "087-2673380",
+      "satisfactionLevel": "Happy",
+      "emailAddress": "me@me.com",
+      "lastVisit": "12/02/2021",
+      "dateOfBirth": "12/02/2000",
+      "activeStatus": "Active",
+      "clientImage": "img1.png",
+      "address": "123 fake street"
+
+    },
+    {
+      "name": "The Donald",
+      "phoneNumber": "087-2673380",
+      "satisfactionLevel": "OK",
+      "emailAddress": "me@me.com",
+      "lastVisit": "12/02/2021",
+      "dateOfBirth": "12/02/2000",
+      "activeStatus": "Inactive",
+      "clientImage": "img1.png",
+      "address": "123 fake street"
+
+    },
+    {
+      "name": "Vince McMahon",
+      "phoneNumber": "087-2673380",
+      "satisfactionLevel": "Not Happy",
+      "emailAddress": "me@me.com",
+      "lastVisit": "12/02/2021",
+      "dateOfBirth": "12/02/2000",
+      "activeStatus": "Inactive",
+      "clientImage": "img1.png",
+      "address": "123 fake street"
+
+    },
+    {
+      "name": "Hornswaggle",
+      "phoneNumber": "087-2673380",
+      "satisfactionLevel": "Happy",
+      "emailAddress": "me@me.com",
+      "lastVisit": "12/02/2021",
+      "dateOfBirth": "12/02/2000",
+      "activeStatus": "Active",
+      "clientImage": "img1.png",
+      "address": "123 fake street"
+    }
+  ]
+}

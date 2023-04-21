@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2020"
+    ],
+    "outDir": "../out-tsc/e2e",
+    "module": "commonjs",
+    "target": "es2020",
+    "types":[
+      "jasmine",
+      "node"
+    ]
+  }
+}

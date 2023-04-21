@@ -1,0 +1,56 @@
+
+<nav #navbar class="navbar-custom navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-minimize">
+            <button id="minimizeSidebar" class="btn btn-danger btn-fill btn-round btn-icon">
+                <i class="fa fa-ellipsis-v visible-on-sidebar-regular"></i>
+                <i class="fa fa-navicon visible-on-sidebar-mini"></i>
+            </button>
+        </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" (click)="sidebarToggle()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <input class="form-control search-input" placeholder="Client Search">
+            <!-- <a class="navbar-brand-custom" *ngIf="isMobileMenu()">{{getTitle()}}</a> -->
+        </div>
+        <div class="collapse navbar-collapse">
+            <div class="" *ngIf="isMobileMenu()">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown dropdown-with-icons dropdown-icons-custom">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <div class="profile">
+                                <div class="avatar-div"><img class="avatar" src="../../../../assets/img/faces/face-0.jpg" alt="..." /></div>
+                                <div class="profile-details">
+                                    <div class="profile-name">Admas William</div>
+                                    <div class="profile-name" style="font-size: small;">View Profile</div>
+                                </div>
+                                <!-- <i class="fa fa-list icon-custom"></i> -->
+                            </div>
+                            
+                            <p class="hidden-md hidden-lg">
+                                More
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <ul class="dropdown-menu dropdown-with-icons">
+                            <li>
+                                    <a href="#" class="text-danger" (click)="logout()">
+                                        <i class="pe-7s-close-circle"></i>
+                                        Log out
+                                    </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<style>
+    
+</style>

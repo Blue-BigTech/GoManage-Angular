@@ -1,0 +1,55 @@
+<div class="main-content">
+
+    <nav #navbar class="navbar navbar-default  custom">
+        <div class="container-fluid">
+            
+            <app-staff-header-menu></app-staff-header-menu>
+
+            <div class="row custom-table"> 
+                <div class="col-md-8 div-content">
+
+                    <div class="date-picker">
+                        <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='START' [endDate]='END'></ejs-daterangepicker>
+ 
+                    </div>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><b>Sales</b></th>
+                                <th class="text-center"><b>Louis NcDonag</b> </th>
+                                <th class="text-center"><b>Aine kelly</b> </th>
+                                <th class="text-center"><b>Mia Fallon</b> </th>
+                                <th class="text-center"><b>Total</b> </th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            <tr *ngFor="let value of LIST">
+                                <td class="text-center"> 
+                                    {{ value.name }} 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </td>
+                                <td class="text-center"> {{ value.test_1 | currency: 'EUR' }} </td>
+                                <td class="text-center"> {{ value.test_2 | currency: 'EUR' }} </td>
+                                <td class="text-center"> {{ value.test_3  | currency: 'EUR'}} </td>
+                                <td class="text-center"> {{ value.test_4  | currency: 'EUR'}} </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"> 
+                                    Total
+                                </td>
+                                <td class="text-center"> {{ '2546.25' | currency: 'EUR' }} </td>
+                                <td class="text-center"> {{ '2746.25' | currency: 'EUR' }} </td>
+                                <td class="text-center"> {{ '2646.25'  | currency: 'EUR'}} </td>
+                                <td class="text-center"> {{ '2546.25'  | currency: 'EUR'}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

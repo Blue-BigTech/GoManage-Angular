@@ -1,0 +1,74 @@
+[
+    {
+      "color_name": "#00FF00",
+      "color_text": "Lime",
+      "colourId": 3,
+      "id": 1,
+      "select": false,
+      "selected": false
+    },
+    {
+        "color_name": "#00FFFF",
+        "color_text": "Aqua",
+        "colourId": 5,
+        "id": 2,
+        "select": false,
+        "selected": false
+    },
+    {
+        "color_name": "#008000",
+        "color_text": "Green",
+        "colourId": 4,
+        "id": 3,
+        "select": false,
+        "selected": false
+    },
+    {
+        "color_name": "#0000FF",
+        "color_text": "Blue",
+        "colourId": 7,
+        "id": 4,
+        "select": false,
+        "selected": false
+    },
+    {
+        "color_name": "#008080",
+        "color_text": "Teal",
+        "colourId": 6,
+        "id": 5,
+        "select": false,
+        "selected": false
+    },
+    {
+        "color_name": "#FF00FF",
+        "color_text": "Fuchsia",
+        "colourId": 10,
+        "id": 6,
+        "select": false,
+        "selected": false
+    },
+    {
+        "color_name": "#FFFF00",
+        "color_text": "Yellow",
+        "colourId": 1,
+        "id": 7,
+        "select": false,
+        "selected": false
+    },
+    {
+        "color_name": "#000080",
+        "color_text": "Navy",
+        "colourId": 9,
+        "id": 8,
+        "select": false,
+        "selected": false
+    },
+    {
+        "color_name": "#800080",
+        "color_text": "Purple",
+        "colourId": 11,
+        "id": 9,
+        "select": false,
+        "selected": false
+    }
+  ]

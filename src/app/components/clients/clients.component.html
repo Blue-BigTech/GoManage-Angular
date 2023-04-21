@@ -1,0 +1,88 @@
+<html>
+<div class="main-content">
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+ 
+
+  
+  <nav #navbar class="navbar navbar-default  custom">
+    <div class="container-fluid">
+
+      <div class="row"> 
+        <div  class="col-md-3">
+          <input class="form-control search-input" placeholder="search" [(ngModel)]="SEARCH_TEXT"  (input)="_filter($event.target.value)">
+          
+        </div>
+        <div class="col-md-3">
+          <!-- <button class="btn btn-default btn-sm active-button shadow" [class.active]="ACTIVE_BUTTON" (click)="_activeButtonFilter()">Active</button>
+          <button class="btn btn-default btn-sm inactive-button shadow" [class.active]="INACTIVE_BUTTON" (click)=" _inActiveButtonFilter()">Inctive</button> -->
+        </div>
+        
+        
+        <div class="col-md-6">
+          <button class="btn btn-default add-new-client" [routerLink]="['add']">Add new client </button>
+        </div>
+      </div>
+
+      <!-- <table class="table client-table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"> -->
+        <table class="table client-table" >
+        <thead>
+          <tr class="table-heading">
+            
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Satisfaction</th>
+            <th>Email</th>
+            <th>Last visit</th>
+            <th>Active</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="LIST.length != 0">
+          <tr *ngFor="let value of LIST">
+          
+            <td> {{ value?.givenName == 'null' ? '' : value?.givenName + ' ' + value?.familyName == 'null' ? '' : value?.familyName }} </td>
+            <td> {{ value?.phoneMobile == 'null' ? '' : value?.phoneMobile }} </td>
+            <td> {{ value?.satisfaction }} </td>
+            <td> {{ value?.email == 'null' ? '' : value?.email}} </td>
+            <td> {{ value?.last_visit}} </td>
+            <td class="activetab"> 
+              {{ value?.status}} 
+            </td>
+            <td>
+                <div class="dropdown">
+                  <button type="button"  class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-ellipsis-v ellipsis" style="cursor: pointer;"></i>
+                  </button>
+                  <div class="dropdown-menu"style="min-width: 69px;margin: auto; padding-left: 5px;padding-right:5px;">
+                      <button class="dropdown-item btn btn-info"[routerLink]="['edit/', value.email]"><i class="fa fa-pencil"></i></button>
+                      <button class="dropdown-item btn btn-danger" (click)="_deleteUser(value.email)"><i class="fa fa-trash"></i></button>
+                  </div>
+              </div>
+             </td>     
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="LIST.length == 0">
+          <tr>
+            <td colspan="6" style="text-align: center;"> <b> No data found </b> </td>
+          </tr>
+        </tbody>
+      </table>
+
+    <div class="pagination">
+      <span class="previous" (click)="_previous()">&laquo;</span>
+     
+      <span class="" *ngFor="let pagination_value of PRINTABLE_PAGINATION" [class.active]="pagination_value.is_active" (click)="_goToPage(pagination_value.name , pagination_value.is_click_able)"> {{pagination_value.name}} </span>
+      
+      <span class="next" (click)="_next()"> &raquo;</span>
+    </div>
+
+    </div>
+  </nav>
+    
+
+     
+</div>
+
+</html>
